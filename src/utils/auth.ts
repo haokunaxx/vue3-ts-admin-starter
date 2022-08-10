@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie'
 
-const TokenKey = 'xuxin'
+const TokenKey = 'vue3-ts-admin-starter-token'
 
 export function SetToken(token: string) {
   return Cookie.set(TokenKey, token)

@@ -19,6 +19,7 @@ export const changeThemeColor = (color: string) => {
 }
 
 export type Themes = 'light' | 'dark' | 'auto'
+
 /**
  * 修改系统主题模式
  */

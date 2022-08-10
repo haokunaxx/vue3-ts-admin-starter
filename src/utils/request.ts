@@ -75,7 +75,7 @@ export class Request {
         config.headers['token'] = token
       }
       return config
-    }, err => console.log(err))
+    }, err => console.log('err(class request intercepter): ', err))
     // 实例请求拦截器
     interceptors
       .request.use(this.instanceInterceptors?.requestInterceptor, this.instanceInterceptors?.requestInterceptorCatcher)
@@ -90,21 +90,11 @@ export class Request {
         return Promise.reject(res.data)
       }
     }, err => {
-      console.log('123: ', err)
+      console.log('err(class response intercepter): ', err)
     })
     // 实例响应拦截器
     interceptors
       .response.use(this.instanceInterceptors?.responseInterceptor, this.instanceInterceptors?.responseInterceptorCatcher)
-  }
-
-  // finally会执行，无论请求成功与否
-  delRequest(url: string) {
-    // 删除requestList中的url（如果存在）
-    const index = this.requestList.findIndex(requestUrl => requestUrl === url)
-    index !== -1 && this.requestCancelPool.splice(index, 1)
-    // 删除requestCancelPool中的url（如果存在）
-    const cancelIndex = this.requestCancelPool.findIndex(cancel => cancel[url])
-    cancelIndex !== -1 && this.requestCancelPool.splice(cancelIndex, 1)
   }
 
   // request<T, R>(config: AxiosRequestConfig<R>): Promise<T> {
@@ -140,12 +130,31 @@ export class Request {
     })
   }
 
+  /**
+   * 删除请求
+   * 请求完成后/取消请求后 =》 删除请求。(finally执行，无论请求成功与否)
+   */
+  delRequest(url: string) {
+    // 删除requestList中的url（如果存在）
+    const index = this.requestList.findIndex(requestUrl => requestUrl === url)
+    index !== -1 && this.requestList.splice(index, 1)
+    // 删除requestCancelPool中的url（如果存在）
+    const cancelIndex = this.requestCancelPool.findIndex(cancel => cancel[url])
+    cancelIndex !== -1 && this.requestCancelPool.splice(cancelIndex, 1)
+  }
+
+  /**
+   * 取消所有请求
+   */
   cancelAllRequest() {
     this.requestCancelPool.forEach(cancelFunction => {
       Object.keys(cancelFunction).forEach(key => cancelFunction[key]())
     })
   }
 
+  /**
+   * 取消指定请求
+   */
   cancelRequest(url: string | string[]) {
     if (Array.isArray(url)) {
       url.forEach(requestNeedCancel => {
@@ -182,6 +191,9 @@ export const serve = new Request({
 
 export const request = serve.request.bind(serve)
 
+
+// -- use Demo start
+
 // serve.request<ReturnDataType, RequestDataType>({
 //   url: 'todo',
 //   method: 'post',
@@ -204,7 +216,7 @@ export const request = serve.request.bind(serve)
 //   console.log('err: ', err)
 // })
 
-
-
 // console.log('取消请求')
 // serve.cancelRequest('todo')
+
+// -- use Demo end
