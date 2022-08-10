@@ -1,17 +1,24 @@
 <script setup lang='ts'>
-import { ref, watch } from 'vue'
-import { updateHTMLAttrs } from '@/utils/dom';
+import { storeToRefs } from 'pinia'
 import { ElIcon } from 'element-plus'
 import { Sunny, MoonNight, Tools } from '@element-plus/icons-vue'
-import UseLocalStorage from '@/uses/useLocalStorage';
-import UseMediaQuery from '@/uses/useMediaQuery'
-const preferredDark = UseMediaQuery('(prefers-color-scheme: dark)')
+
+import { UseLayoutStore } from '@/store/layout/layout.index';
+import type { Themes } from '@/store/layout/layout.index'
+import { changeThemeColor } from '@/utils/dom';
+
 const presetThemeColor = ['#409eff', '#b05058', '#509088', '#4c6a9e', '#9d5a51']
 const colorObj = {
   dark: '#222',
   light: '#eee'
 }
-const themeModeConfigArr = [{
+const themeModeConfigArr: {
+  value: Themes,
+  label: string,
+  icon: any,
+  bgc: string,
+  color: string
+}[] = [{
   value: 'light',
   label: '明亮',
   icon: Sunny,
@@ -31,24 +38,13 @@ const themeModeConfigArr = [{
   color: '#00'
 }]
 const activeColor = ref<string>('#409eff')
-const activeMode = UseLocalStorage('preferred-theme', 'auto')
 
-const changeThemeColor = (color: string) => {
-  const el = document.documentElement
-  // 获取 css 变量
-  getComputedStyle(el).getPropertyValue(`--el-color-primary`)
-  // 设置 css 变量
-  el.style.setProperty('--el-color-primary', color)
-  activeColor.value = color
-}
+const layoutStore = UseLayoutStore();
+const { changeSystemTheme } = layoutStore
 
-const changeTheme = (theme: string) => {
-  activeMode.value = theme
-  if (theme === 'auto') {
-    updateHTMLAttrs('html', 'class', preferredDark.value ? 'dark' : 'light')
-  } else
-    updateHTMLAttrs('html', 'class', theme)
-}
+const { theme } = storeToRefs(layoutStore);
+
+const changeTheme = (theme: Themes) => changeSystemTheme(theme)
 
 
 </script>
@@ -58,7 +54,7 @@ const changeTheme = (theme: string) => {
     <p class="title">主题模式配置</p>
     <ul class="mode-list">
       <li class="mode-list-item" v-for="item in themeModeConfigArr" :key="item.value">
-        <div :class="['mode-list-item-wrap', item.value === activeMode && 'selected']" @click="changeTheme(item.value)">
+        <div :class="['mode-list-item-wrap', item.value === theme && 'selected']" @click="changeTheme(item.value)">
           <div class="item-icon-wrap">
             <div :class="['item-icon', item.value === 'auto' && 'auto']"
               :style="{ backgroundColor: item.bgc, color: item.color }">
@@ -115,7 +111,7 @@ const changeTheme = (theme: string) => {
             height: 100%;
 
             &.auto {
-              background-image: linear-gradient(30deg,#eee 50%,#222 50%);
+              background-image: linear-gradient(30deg, #eee 50%, #222 50%);
             }
           }
         }

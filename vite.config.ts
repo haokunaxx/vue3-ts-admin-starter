@@ -21,6 +21,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => defineConfig({
     ElementPlus({}),
     AutoImport({
       imports: ['vue'],
+      dts:'src/auto-import.d.ts',   //自动导入
       resolvers: [
         ElementPlusResolver(),
          // Auto import icon components

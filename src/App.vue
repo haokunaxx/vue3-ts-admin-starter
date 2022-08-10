@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import { watch } from 'vue';
-import UseLocalStorage from './uses/useLocalStorage';
+import { storeToRefs } from 'pinia'
+import { UseLayoutStore } from './store/layout/layout.index';
 import UseMediaQuery from './uses/useMediaQuery';
-import { updateHTMLAttrs } from '@/utils/dom'
-const activeTheme = UseLocalStorage('preferred-theme', 'auto')
+import { changeSystemTheme } from '@/utils/dom'
+
 const preferredDark = UseMediaQuery('(prefers-color-scheme: dark)')
+const layoutStore = UseLayoutStore();
+const { theme } = storeToRefs(layoutStore);
 
-const patch = (themeMode: string, isPreferredDark: boolean) => {
-  if (themeMode === 'auto') {
-    updateHTMLAttrs('html', 'class', isPreferredDark ? 'dark' : 'light')
+watch([preferredDark, theme], ([newPreferredDarkVal, newTheme]) => {
+  if (newTheme === 'auto') {
+    changeSystemTheme(newPreferredDarkVal ? 'dark' : 'light')
   } else {
-    updateHTMLAttrs('html', 'class', themeMode)
+    changeSystemTheme(newTheme)
   }
-}
-
-watch([preferredDark, activeTheme], ([newPreferredDarkVal, newMode]) => {
-  patch(newMode, newPreferredDarkVal)
 }, {
   immediate: true,
   flush: 'post'

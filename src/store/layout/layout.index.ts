@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
+import { localSet, localGet } from "@/utils/localStorage";
 
-type Themes = 'light' | 'dark'
+export type Themes = 'light' | 'dark' | 'auto'
 type LayoutMode = 'layout-1' | 'layout-2' | 'layout-3'
 type State = {
   drawer: boolean;
@@ -17,7 +18,7 @@ export const UseLayoutStore = defineStore('layoutStore', {
     // 侧边菜单折叠
     collapse: false,
     // 主题
-    theme: 'light',
+    theme: localGet('preferred-theme') || 'auto',
     // 布局模式
     layoutMode: 'layout-1',
     // 隐藏的元素
@@ -30,8 +31,10 @@ export const UseLayoutStore = defineStore('layoutStore', {
     toggleDrawerDisplay(newVal: boolean) {
       this.drawer = newVal
     },
-    toggleTheme(theme: Themes) {
-      this.theme = theme
+    changeSystemTheme(newTheme: Themes) {
+      console.log(newTheme)
+      this.theme = newTheme
+      localSet('preferred-theme', newTheme)
     }
   }
 })

@@ -1,42 +1,41 @@
 <script setup lang='ts'>
-import { ElSwitch } from 'element-plus';
-import UseLocalStorage from '@/uses/useLocalStorage';
+import { ElSwitch } from "element-plus";
+import UseLocalStorage from "@/uses/useLocalStorage";
 
-import layout1 from '@/assets/images/layout-1.png'
-import layout2 from '@/assets/images/layout-2.png'
-import layout3 from '@/assets/images/layout-3.png'
-import { reactive } from 'vue';
+import layout1 from "@/assets/images/layout-1.png";
+import layout2 from "@/assets/images/layout-2.png";
+import layout3 from "@/assets/images/layout-3.png";
 const layoutArr = [
   {
-    value: 'layout-1',
-    img: layout1
+    value: "layout-1",
+    img: layout1,
   },
   {
-    value: 'layout-2',
-    img: layout2
+    value: "layout-2",
+    img: layout2,
   },
   {
-    value: 'layout-3',
-    img: layout3
-  }
-]
+    value: "layout-3",
+    img: layout3,
+  },
+];
 
 const elemCtrlArr = reactive([
   {
-    label: 'Header',
+    label: "Header",
     value: true,
   },
   {
-    label: 'Breadcrumbs',
+    label: "Breadcrumbs",
     value: true,
   },
   {
-    label: 'Footer',
+    label: "Footer",
     value: true,
   },
-])
+]);
 
-const activeLayout = UseLocalStorage('preferred-layout', 'layout-1')
+const activeLayout = UseLocalStorage("preferred-layout", "layout-1");
 </script>
 
 <template>
@@ -44,7 +43,12 @@ const activeLayout = UseLocalStorage('preferred-layout', 'layout-1')
     <p class="title">导航布局</p>
     <ul class="mode-list">
       <li class="mode-list-item" v-for="(item, idx) in layoutArr" :key="idx">
-        <div :class="['mode-list-item-wrap', item.value === activeLayout && 'selected']">
+        <div
+          :class="[
+            'mode-list-item-wrap',
+            item.value === activeLayout && 'selected',
+          ]"
+        >
           <img class="item-thumbnail-pic" :src="item.img" />
         </div>
       </li>
@@ -62,8 +66,8 @@ const activeLayout = UseLocalStorage('preferred-layout', 'layout-1')
 </template>
 
 <style lang='scss' scoped>
-@import '@/assets/styles/mixins.scss';
-@import './common.scss';
+@import "@/assets/styles/mixins.scss";
+@import "./common.scss";
 
 .title {
   @include configItemTitle;
@@ -87,7 +91,6 @@ const activeLayout = UseLocalStorage('preferred-layout', 'layout-1')
         }
       }
     }
-
   }
 }
 
@@ -98,7 +101,8 @@ const activeLayout = UseLocalStorage('preferred-layout', 'layout-1')
       justify-content: space-between;
       align-items: center;
 
-      &-label {}
+      &-label {
+      }
     }
   }
 }
