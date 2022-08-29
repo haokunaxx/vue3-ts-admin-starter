@@ -2,12 +2,13 @@
 import { storeToRefs } from 'pinia'
 import { UseLayoutStore } from './store/layout/layout.index';
 import UseMediaQuery from './uses/useMediaQuery';
-import { changeSystemTheme } from '@/utils/dom'
+import { changeSystemTheme, changeThemeColor } from '@/utils/dom'
 
 const preferredDark = UseMediaQuery('(prefers-color-scheme: dark)')
 const layoutStore = UseLayoutStore();
-const { theme } = storeToRefs(layoutStore);
+const { theme, activeColor } = storeToRefs(layoutStore);
 
+// 初始化主题
 watch([preferredDark, theme], ([newPreferredDarkVal, newTheme]) => {
   if (newTheme === 'auto') {
     changeSystemTheme(newPreferredDarkVal ? 'dark' : 'light')
@@ -18,6 +19,8 @@ watch([preferredDark, theme], ([newPreferredDarkVal, newTheme]) => {
   immediate: true,
   flush: 'post'
 })
+// 初始化主题色
+changeThemeColor(activeColor.value)
 
 </script>
 

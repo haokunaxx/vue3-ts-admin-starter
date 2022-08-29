@@ -116,6 +116,7 @@ export class Request {
       this.instance.request<any, T, R>(config)
         .then(res => {
           // 如果存在接口响应拦截器
+          console.log(res)
           if (config.interceptors?.responseInterceptor) {
             res = config.interceptors.responseInterceptor<T>(res)
           }
@@ -124,7 +125,6 @@ export class Request {
         .catch(err => {
           reject(err)
         }).finally(() => {
-          // console.log('finally', '取消请求', config.url)
           config.url && this.delRequest(config.url)
         })
     })
@@ -169,7 +169,7 @@ export class Request {
 }
 
 export const serve = new Request({
-  baseURL: 'http://localhost:3000/api/',
+  baseURL: 'http://localhost:5173/api/',
   // interceptors: {
   //   requestInterceptor: (config: AxiosRequestConfig): AxiosRequestConfig => {
   //     console.log('实例的request interceptor执行了')

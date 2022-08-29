@@ -2,34 +2,32 @@
 import { ElContainer, ElHeader, ElAside, ElMain, ElFooter } from 'element-plus'
 import SidebarMenu from './SidebarMenu/index.vue'
 import Header from './header.vue'
-import { UseUserStore } from '@/store/user/user.index';
-import { useRouter } from 'vue-router';
-
-const userStore = UseUserStore(),
-  router = useRouter()
-
-const handleClick = () => {
-  userStore.logout().then(() => {
-    router.replace({
-      name: 'Login'
-    })
-  })
-}
+import { UseLayoutStore } from '@/store/layout/layout.index';
+// import { storeToRefs } from 'pinia';
+// const { isCollapse } = storeToRefs(UseLayoutStore())
+const layoutStore = UseLayoutStore()
+const isCollapse = computed(() => layoutStore.collapse)
 </script>
 
 <template>
   <div class="common-layout">
     <el-container>
       <el-header>
-        <Header />
+        <!-- <Header /> -->
+        <SidebarMenu mode='horizontal' />
       </el-header>
       <el-container>
-        <el-aside width="200px">
+        <el-aside>
           <SidebarMenu />
         </el-aside>
         <el-container>
-          <el-main>
-            <router-view />
+          <el-main class="el-main-wrapper">
+            <div class="el-main-wrapper-content">
+              <router-view />
+            </div>
+            <div class="setting-trigger">
+              <i-ep-tools />
+            </div>
           </el-main>
           <el-footer></el-footer>
         </el-container>
@@ -39,10 +37,25 @@ const handleClick = () => {
 </template>
 
 <style lang='scss' scoped>
-.common-layout{
+@import '@/assets/styles/mixins.scss';
+
+.common-layout {
   height: 100%;
-  &::v-deep .el-container{
-   height: 100%; 
+
+  .el-main-wrapper {
+    @include flex-row;
+
+    &-content {
+      flex: 1;
+    }
+
+    .setting-trigger {
+      width: 50px;
+    }
+  }
+
+  &::v-deep .el-container {
+    height: 100%;
   }
 }
 </style>

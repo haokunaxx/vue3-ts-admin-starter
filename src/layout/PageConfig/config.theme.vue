@@ -3,11 +3,10 @@ import { storeToRefs } from 'pinia'
 import { ElIcon } from 'element-plus'
 import { Sunny, MoonNight, Tools } from '@element-plus/icons-vue'
 
-import { UseLayoutStore } from '@/store/layout/layout.index';
+import { UseLayoutStore, ActiveColors } from '@/store/layout/layout.index';
 import type { Themes } from '@/store/layout/layout.index'
 import { changeThemeColor } from '@/utils/dom';
 
-const presetThemeColor = ['#409eff', '#b05058', '#509088', '#4c6a9e', '#9d5a51']
 const colorObj = {
   dark: '#222',
   light: '#eee'
@@ -37,16 +36,18 @@ const themeModeConfigArr: {
   bgc: colorObj.light,
   color: '#00'
 }]
-const activeColor = ref<string>('#409eff')
 
 const layoutStore = UseLayoutStore();
 const { changeSystemTheme } = layoutStore
 
-const { theme } = storeToRefs(layoutStore);
+const { theme, activeColor } = storeToRefs(layoutStore);
 
 const changeTheme = (theme: Themes) => changeSystemTheme(theme)
 
-
+const changeActiveColor = (color: ActiveColors) => {
+  layoutStore.changeActiveColor(color)
+  changeThemeColor(color)
+}
 </script>
 
 <template>
@@ -63,7 +64,7 @@ const changeTheme = (theme: Themes) => changeSystemTheme(theme)
               </el-icon>
             </div>
           </div>
-          <p class="item-label">{{ item.label }}</p>
+          <p class="item-label">{{  item.label  }}</p>
         </div>
       </li>
     </ul>
@@ -71,8 +72,8 @@ const changeTheme = (theme: Themes) => changeSystemTheme(theme)
   <section class="page-config-theme-color">
     <p class="title">主题色配置</p>
     <ul class="theme-color-list">
-      <li @click="changeThemeColor(item)" :class="['theme-color-list-item', item === activeColor && 'selected']"
-        v-for="item in presetThemeColor" :key="item">
+      <li v-for="item in ActiveColors" :key="item" @click="changeActiveColor(item)"
+        :class="['theme-color-list-item', item === activeColor && 'selected']">
         <div :style="{ backgroundColor: item }"></div>
       </li>
     </ul>

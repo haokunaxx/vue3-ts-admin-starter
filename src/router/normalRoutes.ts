@@ -1,5 +1,6 @@
 import type { Routes } from './types'
-import Layout from '@/layout/index.vue'
+// import Layout from '@/layout/index.vue'
+import Layout from '@/layout/layout.index.vue'
 export default [
   // {
   //   path: '/redirect/:path*',
@@ -27,7 +28,7 @@ export default [
     children: [{
       name: 'normalList',
       path: 'normal-list',
-      component: () => import('@/views/test.vue'),
+      component: () => import('@/views/list/normalList.vue'),
       meta: {
         title: '基础列表',
         icon: 'location',
@@ -65,7 +66,7 @@ export default [
       title: '常见表单',
       icon: 'form'
     },
-    children:[{
+    children: [{
       name: 'BaseForm',
       path: 'base',
       component: () => import('@/views/test.vue'),
@@ -73,7 +74,7 @@ export default [
         title: '基础表单',
         icon: 'location',
       }
-    },{
+    }, {
       name: 'StepForm',
       path: 'step',
       component: () => import('@/views/test.vue'),
@@ -92,7 +93,7 @@ export default [
       title: '统计报表',
       icon: 'chart',
     },
-    children:[{
+    children: [{
       name: 'BaseDashborad',
       path: 'base',
       component: () => import('@/views/test.vue'),

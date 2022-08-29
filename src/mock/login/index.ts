@@ -1,12 +1,6 @@
 import { MockMethod, Recordable } from "vite-plugin-mock";
 import { ResponseCode } from '../types/responseCode'
-interface MockResponseBase {
-  code: number;
-  message: string;
-  data?: {
-    [key: string]: any;
-  };
-}
+import { MockResponseBase } from '../mock.index'
 
 interface Token {
   admin: string;

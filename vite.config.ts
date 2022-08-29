@@ -8,12 +8,15 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import ElementPlus from 'unplugin-element-plus/vite' //按需引入
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-
+import vueJsx from '@vitejs/plugin-vue-jsx'
 // https://vitejs.dev/config/
 // export default defineConfig({
 export default ({ command }: ConfigEnv): UserConfigExport => defineConfig({
   plugins: [
-    vue(),
+    vue({
+      reactivityTransform: true, //props解构时可以赋默认值
+    }),
+    vueJsx(),
     viteMockServe({
       localEnabled: command === 'serve',
       mockPath: './src/mock'
@@ -21,10 +24,10 @@ export default ({ command }: ConfigEnv): UserConfigExport => defineConfig({
     ElementPlus({}),
     AutoImport({
       imports: ['vue'],
-      dts:'src/auto-import.d.ts',   //自动导入
+      dts: 'src/auto-import.d.ts',   //自动导入
       resolvers: [
         ElementPlusResolver(),
-         // Auto import icon components
+        // Auto import icon components
         // 自动导入图标组件
         IconsResolver({
           prefix: 'Icon',

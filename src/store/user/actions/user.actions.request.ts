@@ -22,8 +22,8 @@ export function login(this: UserStore, data: LoginRequestData) {
 
 // 获取用户信息
 export function getInfo(this: UserStore) {
-  return new Promise<GetUserInfoResponse>((resolve, reject) => {
-    GetUserInfo(this.token).then(res => {
+  return new Promise<GetUserInfoResponse>(async(resolve, reject) => {
+    GetUserInfo(this.token as string).then(res => {
       const { introduction, name, roles } = res.data
       this.setIntro(introduction)
       this.setName(name)

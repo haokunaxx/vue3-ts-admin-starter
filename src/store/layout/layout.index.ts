@@ -1,13 +1,22 @@
 import { defineStore } from "pinia";
 import { localSet, localGet } from "@/utils/localStorage";
-
 export type Themes = 'light' | 'dark' | 'auto'
-type LayoutMode = 'layout-1' | 'layout-2' | 'layout-3'
+export enum LayoutEnum {
+  FullPageLayout = 'fullPageLayout',
+  NoSidebarLayout = 'noSidebarLayout'
+}
+export enum ActiveColors {
+  Blue = '#2c82fd',
+  Red = '#b05058'
+}
+
+// type LayoutMode = 'layout-1' | 'layout-2' | 'layout-3'
 type State = {
   drawer: boolean;
   collapse: boolean;
   theme: Themes,
-  layoutMode: LayoutMode,
+  layoutMode: LayoutEnum,
+  activeColor: ActiveColors,
   elemHideArr: string[]
 }
 
@@ -20,7 +29,8 @@ export const UseLayoutStore = defineStore('layoutStore', {
     // 主题
     theme: localGet('preferred-theme') || 'auto',
     // 布局模式
-    layoutMode: 'layout-1',
+    layoutMode: localGet('preferred-layout') || LayoutEnum.FullPageLayout,
+    activeColor: localGet('preferred-color') || ActiveColors.Blue,
     // 隐藏的元素
     elemHideArr: ['footer']
   }),
@@ -35,6 +45,14 @@ export const UseLayoutStore = defineStore('layoutStore', {
       console.log(newTheme)
       this.theme = newTheme
       localSet('preferred-theme', newTheme)
+    },
+    changeAppLayout(newLayout: LayoutEnum) {
+      this.layoutMode = newLayout
+      localSet('preferred-layout', newLayout)
+    },
+    changeActiveColor(newActiveColor: ActiveColors) {
+      this.activeColor = newActiveColor
+      localSet('preferred-color', newActiveColor)
     }
   }
 })
