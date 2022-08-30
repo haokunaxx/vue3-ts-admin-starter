@@ -1,5 +1,4 @@
-import type { Routes } from './types'
-// import Layout from '@/layout/index.vue'
+import { RouteRecordRaw } from "vue-router";
 import Layout from '@/layout/layout.index.vue'
 export default [
   // {
@@ -7,7 +6,7 @@ export default [
   // },
   {
     path: '/',
-    redirect: '/list',
+    redirect: '/dashboard',
     hide: true
   },
   {
@@ -15,6 +14,25 @@ export default [
     path: '/login',
     hide: true,
     component: () => import('@/pages/login.vue'),
+  },
+  {
+    name: 'Dashboard',
+    path: '/dashboard',
+    redirect: '/dashboard/base',
+    component: Layout,
+    meta: {
+      title: '统计报表',
+      icon: 'chart',
+    },
+    children: [{
+      name: 'BaseDashboard',
+      path: 'base',
+      component: () => import('@/views/chart/chart.index.vue'),
+      meta: {
+        title: '概览仪表盘',
+        icon: 'location',
+      }
+    }]
   },
   {
     path: '/list',
@@ -28,7 +46,7 @@ export default [
     children: [{
       name: 'normalList',
       path: 'normal-list',
-      component: () => import('@/views/list/normalList.vue'),
+      component: () => import('@/views/list/normal/list.normal.index.vue'),
       meta: {
         title: '基础列表',
         icon: 'location',
@@ -36,73 +54,38 @@ export default [
     }, {
       name: 'cardList',
       path: 'card-list',
-      component: () => import('@/views/test.vue'),
+      component: () => import('@/views/list/card/list.card.index.vue'),
       meta: {
         title: '卡片列表',
         icon: 'location',
       }
-    }, {
-      name: 'filterList',
-      path: 'filter-list',
-      component: () => import('@/views/test.vue'),
-      meta: {
-        title: '筛选列表',
-        icon: 'location',
-      }
-    }, {
-      name: 'treeFilterList',
-      path: 'tree-filter-list',
-      component: () => import('@/views/test.vue'),
-      meta: {
-        title: '树状筛选列表',
-        icon: 'location',
-      }
     }]
   },
-  {
-    name: 'Form',
-    path: '/form',
-    meta: {
-      title: '常见表单',
-      icon: 'form'
-    },
-    children: [{
-      name: 'BaseForm',
-      path: 'base',
-      component: () => import('@/views/test.vue'),
-      meta: {
-        title: '基础表单',
-        icon: 'location',
-      }
-    }, {
-      name: 'StepForm',
-      path: 'step',
-      component: () => import('@/views/test.vue'),
-      meta: {
-        title: '分步表单',
-        icon: 'location',
-      }
-    }]
-  },
-  {
-    name: 'Dashborad',
-    path: '/dashborad',
-    redirect: '/dashborad/base',
-    component: Layout,
-    meta: {
-      title: '统计报表',
-      icon: 'chart',
-    },
-    children: [{
-      name: 'BaseDashborad',
-      path: 'base',
-      component: () => import('@/views/test.vue'),
-      meta: {
-        title: '概览仪表盘',
-        icon: 'location',
-      }
-    }]
-  },
+  // {
+  //   name: 'Form',
+  //   path: '/form',
+  //   meta: {
+  //     title: '常见表单',
+  //     icon: 'form'
+  //   },
+  //   children: [{
+  //     name: 'BaseForm',
+  //     path: 'base',
+  //     component: () => import('@/views/test.vue'),
+  //     meta: {
+  //       title: '基础表单',
+  //       icon: 'location',
+  //     }
+  //   }, {
+  //     name: 'StepForm',
+  //     path: 'step',
+  //     component: () => import('@/views/test.vue'),
+  //     meta: {
+  //       title: '分步表单',
+  //       icon: 'location',
+  //     }
+  //   }]
+  // },
   {
     name: 'ExternalLink',
     path: '/external-link',
@@ -119,4 +102,4 @@ export default [
       },
     }]
   }
-] as Routes
+] as RouteRecordRaw[]

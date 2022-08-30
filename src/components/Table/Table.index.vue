@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import Link from '@/components/Link/component.link.vue'
+import Link from '@/components/Link/Link.index.vue'
 interface Props {
   list: any[];
   columns: any[];
@@ -14,8 +14,7 @@ const { list, columns } = defineProps<Props>()
     <template v-for="item in columns" :key="item.prop">
       <el-table-column v-if="!item.type" :fixed="item.fixed" :width="item.width" :label="item.label" :prop="item.prop">
       </el-table-column>
-      <el-table-column v-else-if="item.type === 'selection'" :fixed="item.fixed" :width="item.width" type="selection"
-        width="55">
+      <el-table-column v-else-if="item.type === 'selection'" :fixed="item.fixed" :width="item.width" type="selection">
       </el-table-column>
       <el-table-column v-else-if="item.type === 'custom'" :fixed="item.fixed" :width="item.width" :label="item.label"
         :prop="item.prop">

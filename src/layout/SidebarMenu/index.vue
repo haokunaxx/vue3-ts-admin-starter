@@ -6,18 +6,12 @@ import Item from './sidebarItem.vue'
 import { ref, computed } from 'vue'
 import { UseUserStore } from '@/store/user/user.index'
 import { UseLayoutStore } from '@/store/layout/layout.index'
-// import { UseControllerStore } from '@/store/controller/controller.index'
-
-// const isCollapse = ref(false)
-
 const { mode } = defineProps<{
   mode?: 'horizontal' | 'vertical'
 }>()
 
 const userStore = UseUserStore(),
   layoutStore = UseLayoutStore()
-// controllerStore = UseControllerStore()
-// const isCollapse = computed(() => controllerStore.sidebarCollapse)
 const isCollapse = computed(() => layoutStore.collapse)
 const route = useRoute()
 const userRoutes = userStore.userRoutes
@@ -42,15 +36,10 @@ const handleClose = () => {
 <style lang='scss' scoped>
 .el-menu-vertical {
   height: 100%;
-}
 
-// .el-menu-vertical:not(.el-menu--collapse) {
-//   width: 200px;
-//   min-height: 400px;
-// }
-// .el-menu-vertical {
-//   &::deep(.el-menu--collapse) {
-//     width: 63px;
-//   }
-// }
+  //去除padding
+  :deep(.el-menu-item-group__title) {
+    padding: 0;
+  }
+}
 </style>

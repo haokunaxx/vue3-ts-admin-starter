@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import SidebarMenu from './SidebarMenu/index.vue'
+import SidebarMenu from '../SidebarMenu/index.vue'
 const emit = defineEmits(['showDrawer'])
 const handleClick = () => {
   emit('showDrawer')

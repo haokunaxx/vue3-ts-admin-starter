@@ -1,5 +1,5 @@
-import type { Routes } from './types'
-import Layout from '@/layout/index.vue'
+import { RouteRecordRaw } from "vue-router";
+import Layout from '@/layout/layout.index.vue'
 export default [
   // {
   //   path: '/',
@@ -95,4 +95,4 @@ export default [
   //     icon: 'location',
   //   },
   // }
-] as Routes
+] as RouteRecordRaw[]
