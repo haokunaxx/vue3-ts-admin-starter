@@ -48,9 +48,10 @@ declare module '@vue/runtime-core' {
     IEpOperation: typeof import('~icons/ep/operation')['default']
     IEpOperations: typeof import('~icons/ep/operations')['default']
     IEpTools: typeof import('~icons/ep/tools')['default']
+    'Link.index': typeof import('./src/components/Link/Link.index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    'Table.index': typeof import('./src/components/Table/table.index.vue')['default']
+    'Table.index': typeof import('./src/components/Table/Table.index.vue')['default']
   }
 }
 
