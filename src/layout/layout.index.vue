@@ -1,12 +1,13 @@
 <script setup lang='ts'>
-import FullPageLayout from './layout.fullPageLayout.vue'
-import NoSidebarLayout from './layout.noSidebarLayout.vue'
+import FullPageLayout from './Layout/layout.fullPage.vue'
+import NoSidebarLayout from './Layout/layout.noSidebar.vue'
 
 import DrawerThemeConfiger from './PageConfig/config.theme.vue'
 import DrawerLayoutConfiger from './PageConfig/config.layout.vue'
 
 import { UseLayoutStore, LayoutEnum } from '@/store/layout/layout.index';
 import { storeToRefs } from 'pinia';
+
 const layoutStore = UseLayoutStore()
 const { layoutMode } = storeToRefs(layoutStore)
 const AppContainer = computed(() => {

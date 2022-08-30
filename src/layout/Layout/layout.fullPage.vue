@@ -1,6 +1,6 @@
 <script setup lang='ts'>
-import Header from './header.vue'
-import SidebarMenu from './SidebarMenu/index.vue'
+import Header from '../layout.header.vue'
+import SidebarMenu from '../SidebarMenu/index.vue'
 </script>
 
 <template>

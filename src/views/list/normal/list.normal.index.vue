@@ -1,14 +1,14 @@
 <script setup lang='ts'>
-import Button from '@/components/Button/index.vue';
-import Table from '@/components/Table/component.table.vue'
+import Button from '@/components/Button/Button.index.vue';
+import Table from '@/components/Table/Table.index.vue'
 // import TableFilter from './components/list.table.filter.vue'
-import { useTablePagination } from './tables/table.pagination'
+import { useTablePagination } from '@/uses/useTablePagination'
 
 import { fetchList } from '@/api/list';
 import { List } from '@/mock/list/list'
 
 import type { Ref } from 'vue'
-import { FormTypes, FormItemType, FormItemTypes, LabelKey } from './list.index.d';
+import { FormTypes, FormItemType, FormItemTypes, LabelKey } from '../list.index.d';
 import { filter } from 'lodash';
 // 表格列数据
 const columns = [{

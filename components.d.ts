@@ -6,6 +6,9 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Button: typeof import('./src/components/Button/index.vue')['default']
+    'Button.index': typeof import('./src/components/Button/Button.index.vue')['default']
+    'Com.link.index': typeof import('./src/components/Link/com.link.index.vue')['default']
+    'Com.table.index': typeof import('./src/components/Table/com.table.index.vue')['default']
     'Component.link': typeof import('./src/components/Link/component.link.vue')['default']
     'Component.link.index': typeof import('./src/components/Link/component.link.index.vue')['default']
     'Component.table': typeof import('./src/components/Table/component.table.vue')['default']
@@ -48,9 +51,10 @@ declare module '@vue/runtime-core' {
     IEpOperation: typeof import('~icons/ep/operation')['default']
     IEpOperations: typeof import('~icons/ep/operations')['default']
     IEpTools: typeof import('~icons/ep/tools')['default']
+    'Link.index': typeof import('./src/components/Link/Link.index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    'Table.index': typeof import('./src/components/Table/table.index.vue')['default']
+    'Table.index': typeof import('./src/components/Table/Table.index.vue')['default']
   }
 }
 

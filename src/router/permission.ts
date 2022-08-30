@@ -6,6 +6,11 @@ import { UsePermissionStore, UseUserStore } from '@/store/index'
 
 import type { RouteRecordRaw, RouteRecordName } from 'vue-router'
 
+/**
+ * 判断是否有权限，根据路由的meta属性对应的roles进行判断
+ * @param route 当前判断的路由
+ * @param roles 登陆的用户的角色集合
+*/
 function hasPermission(route: RouteRecordRaw, roles: string[]): boolean {
   if (route.meta?.roles) {
     return roles.some(role => route.meta?.roles?.includes(role))
@@ -13,6 +18,11 @@ function hasPermission(route: RouteRecordRaw, roles: string[]): boolean {
   return true
 }
 
+/**
+ * 根据登陆的用户角色过滤对应的路由
+ * @param authRoutes 需要权限的路由集合
+ * @param roles 登陆的用户的角色集合
+*/
 function filterAuthRoutes(authRoutes: RouteRecordRaw[], roles: string[]) {
   let resRoutes: RouteRecordRaw[] = []
   authRoutes.forEach(item => {
@@ -27,17 +37,23 @@ function filterAuthRoutes(authRoutes: RouteRecordRaw[], roles: string[]) {
   return resRoutes
 }
 
-function generateRoute(roles: string[]) {
+/**
+ * 根据登陆的用户角色生成路由
+ * @param roles 登陆的用户的角色集合
+*/
+function generateRoute(roles: string[]): RouteRecordRaw[] {
   let generatedRoutes
   if (roles.includes('admin')) {
     generatedRoutes = authRoutes || []
   } else {
     generatedRoutes = filterAuthRoutes(authRoutes, roles)
-    console.log('生成的路由：', generatedRoutes)
+    // console.log('生成的路由：', generatedRoutes)
   }
   return generatedRoutes
 }
 
+
+//路由守卫
 router.beforeEach(async (to, from, next) => {
   const hasToken = GetToken()
   if (hasToken) {

@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import Button from '@/components/Button/index.vue'
+import Button from '@/components/Button/Button.index.vue'
 import { UseLayoutStore } from '@/store/layout/layout.index';
 import { storeToRefs } from 'pinia';
 const store = UseLayoutStore()
@@ -18,7 +18,7 @@ const toggleSidebarCollapse = () => {
     <div class="header-left">{{  collapse ? 'XX' : 'Vue3-Typescript-ElementPlus Starter' }}</div>
 
     <div class="header-middle">
-      <Button type="text" @click="toggleSidebarCollapse">
+      <Button link @click="toggleSidebarCollapse">
         <i-ep-Operation />
       </Button>
     </div>

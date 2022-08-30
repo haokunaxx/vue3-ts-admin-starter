@@ -9,7 +9,6 @@ const props = defineProps<{
 
 const { item, parentPath } = props,
   { meta, path, children } = item
-
 const hasChildren = props.item.children?.length ?? false,
   routePath = `${parentPath ? parentPath + '/' : ''}${path}`
 </script>
@@ -23,19 +22,10 @@ const hasChildren = props.item.children?.length ?? false,
       <SidebarItem v-for="child in children" :item="child" :key="child.path" :parentPath="path" />
     </el-menu-item-group>
   </el-sub-menu>
-  <!-- <el-menu-item v-else :route="routePath" :index="routePath">
-    <span>
-      {{ meta?.title }}
-    </span>
-  </el-menu-item> -->
   <Link v-else :route="path" :parentRoute="parentPath ?? ''">
-    <el-menu-item :index="routePath">{{ meta?.title }}</el-menu-item>
+    <el-menu-item :index="routePath">{{  meta?.title  }}</el-menu-item>
   </Link>
 </template>
 
 <style lang='scss' scoped>
 </style>
-
- <!-- <Link v-else :route="path" :parentRoute="parentPath ?? ''">
-    <el-menu-item :index="routePath">{{ meta?.title }}</el-menu-item>
-  </Link> -->
