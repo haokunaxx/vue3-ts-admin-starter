@@ -35,6 +35,25 @@ export default [
     }]
   },
   {
+    name: 'BusinessComponents',
+    path: '/business-component',
+    redirect: '/business-component/dialog-container',
+    component: Layout,
+    meta: {
+      title: '业务组件',
+      icon: 'chart',
+    },
+    children: [{
+      name: 'DialogContainer',
+      path: 'dialog-container',
+      component: () => import('@/views/businessComponents/dialogContainer/bc.dialogContainer.index.vue'),
+      meta: {
+        title: 'Dialog容器',
+        icon: 'location'
+      }
+    }]
+  },
+  {
     path: '/list',
     name: 'List',
     redirect: '/list/normal-list',

@@ -1,6 +1,8 @@
 <script setup lang='ts'>
 import Header from '../layout.header.vue'
 import SidebarMenu from '../SidebarMenu/index.vue'
+import Breadcrumb from '../Breadcrumb/layout.breadcrumb.index.vue'
+import Tags from '../Tags/layout.tags.index.vue'
 </script>
 
 <template>
@@ -15,6 +17,8 @@ import SidebarMenu from '../SidebarMenu/index.vue'
       <el-container>
         <el-main class="el-main-wrapper">
           <div class="el-main-wrapper-content">
+            <Breadcrumb />
+            <Tags />
             <router-view />
           </div>
         </el-main>
@@ -25,4 +29,5 @@ import SidebarMenu from '../SidebarMenu/index.vue'
 </template>
 
 <style lang='scss' scoped>
+
 </style>
