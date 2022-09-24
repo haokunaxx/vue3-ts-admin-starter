@@ -24,9 +24,9 @@ function hasPermission(route: RouteRecordRaw, roles: string[]): boolean {
  * @param roles 登陆的用户的角色集合
 */
 function filterAuthRoutes(authRoutes: RouteRecordRaw[], roles: string[]) {
-  let resRoutes: RouteRecordRaw[] = []
+  const resRoutes: RouteRecordRaw[] = []
   authRoutes.forEach(item => {
-    let route = { ...item }
+    const route = { ...item }
     if (hasPermission(route, roles)) {
       if (item.children) {
         route.children = filterAuthRoutes(item.children, roles)
@@ -71,7 +71,7 @@ router.beforeEach(async (to, from, next) => {
         try {
           const { roles } = await userStore.getInfo() //请求用户信息
           const routes = generateRoute(roles) //根据用户信息中的roles字段生成对应的路由
-          let authRouteNames: RouteRecordName[] = []
+          const authRouteNames: RouteRecordName[] = []
           routes.forEach(route => { //添加路由
             if (route.name) {
               authRouteNames.push(route.name)
