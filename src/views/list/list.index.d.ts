@@ -1,6 +1,6 @@
-import type { ListItem } from '@/mock/list/list'
+import type { ListItem } from "@/mock/list/list";
 
-export type LabelKey = Omit<ListItem, 'id'>
+export type LabelKey = Omit<ListItem, "id">;
 
 export interface FormItemBase {
   label: string;
@@ -15,14 +15,14 @@ export interface FormItemBase {
 }
 
 export enum FormItemTypes {
-  CheckboxGroup = 'checkboxGroup',
-  Select = 'select',
-  Input = 'input'
+  CheckboxGroup = "checkboxGroup",
+  Select = "select",
+  Input = "input",
 }
 
 type CheckboxGroupValue = string[];
-type SelectValue = string[]
-type InputValue = string
+type SelectValue = string[];
+type InputValue = string;
 
 interface TypeGeneric<T, U> extends FormItemBase {
   type: T;
@@ -30,8 +30,9 @@ interface TypeGeneric<T, U> extends FormItemBase {
   defaultValue?: U;
 }
 
-export type FormItemType = TypeGeneric<FormItemTypes.CheckboxGroup, CheckboxGroupValue>
+export type FormItemType =
+  | TypeGeneric<FormItemTypes.CheckboxGroup, CheckboxGroupValue>
   | TypeGeneric<FormItemTypes.Input, InputValue>
-  | TypeGeneric<FormItemTypes.Select, SelectValue>
+  | TypeGeneric<FormItemTypes.Select, SelectValue>;
 
-export type FormTypes = FormItemType[]
+export type FormTypes = FormItemType[];

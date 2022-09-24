@@ -1,16 +1,16 @@
-import { defineStore } from 'pinia'
-import type { RouteRecordName } from "vue-router"
+import { defineStore } from "pinia";
+import type { RouteRecordName } from "vue-router";
 interface PermissionStoreState {
-  authRoutesNames: RouteRecordName[]
+  authRoutesNames: RouteRecordName[];
 }
 
-export const UsePermissionStore = defineStore('permissionStore', {
+export const UsePermissionStore = defineStore("permissionStore", {
   state: (): PermissionStoreState => ({
-    authRoutesNames: []
+    authRoutesNames: [],
   }),
   actions: {
     setAuthRoutesNames(names: RouteRecordName[]): void {
-      this.authRoutesNames = names
-    }
-  }
-})
+      this.authRoutesNames = names;
+    },
+  },
+});

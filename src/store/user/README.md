@@ -1,4 +1,5 @@
-user store的作用
+user store 的作用
+
 1. 登录
 2. 登出
 3. 获取用户信息

@@ -1,70 +1,83 @@
-<script setup lang='ts'>
-import { storeToRefs } from 'pinia'
-import { ElIcon } from 'element-plus'
-import { Sunny, MoonNight, Tools } from '@element-plus/icons-vue'
+<script setup lang="ts">
+import { storeToRefs } from "pinia";
+import { ElIcon } from "element-plus";
+import { Sunny, MoonNight, Tools } from "@element-plus/icons-vue";
 
-import { UseLayoutStore, ActiveColors } from '@/store/layout/layout.index';
-import type { Themes } from '@/store/layout/layout.index'
-import { changeThemeColor } from '@/utils/dom';
+import { UseLayoutStore, ActiveColors } from "@/store/layout/layout.index";
+import type { Themes } from "@/store/layout/layout.index";
+import { changeThemeColor } from "@/utils/dom";
 
 const colorObj = {
-  dark: '#222',
-  light: '#eee'
-}
+  dark: "#222",
+  light: "#eee",
+};
 const themeModeConfigArr: {
-  value: Themes,
-  label: string,
-  icon: any,
-  bgc: string,
-  color: string
-}[] = [{
-  value: 'light',
-  label: '明亮',
-  icon: Sunny,
-  bgc: colorObj.light,
-  color: '#000'
-}, {
-  value: 'dark',
-  label: '黑暗',
-  icon: MoonNight,
-  bgc: colorObj.dark,
-  color: '#fff'
-}, {
-  value: 'auto',
-  label: '跟随系统',
-  icon: Tools,
-  bgc: colorObj.light,
-  color: '#00'
-}]
+  value: Themes;
+  label: string;
+  icon: any;
+  bgc: string;
+  color: string;
+}[] = [
+  {
+    value: "light",
+    label: "明亮",
+    icon: Sunny,
+    bgc: colorObj.light,
+    color: "#000",
+  },
+  {
+    value: "dark",
+    label: "黑暗",
+    icon: MoonNight,
+    bgc: colorObj.dark,
+    color: "#fff",
+  },
+  {
+    value: "auto",
+    label: "跟随系统",
+    icon: Tools,
+    bgc: colorObj.light,
+    color: "#00",
+  },
+];
 
 const layoutStore = UseLayoutStore();
-const { changeSystemTheme } = layoutStore
+const { changeSystemTheme } = layoutStore;
 
 const { theme, activeColor } = storeToRefs(layoutStore);
 
-const changeTheme = (theme: Themes) => changeSystemTheme(theme)
+const changeTheme = (theme: Themes) => changeSystemTheme(theme);
 
 const changeActiveColor = (color: ActiveColors) => {
-  layoutStore.changeActiveColor(color)
-  changeThemeColor(color)
-}
+  layoutStore.changeActiveColor(color);
+  changeThemeColor(color);
+};
 </script>
 
 <template>
   <section class="page-config-theme-mode">
     <p class="title">主题模式配置</p>
     <ul class="mode-list">
-      <li class="mode-list-item" v-for="item in themeModeConfigArr" :key="item.value">
-        <div :class="['mode-list-item-wrap', item.value === theme && 'selected']" @click="changeTheme(item.value)">
+      <li
+        class="mode-list-item"
+        v-for="item in themeModeConfigArr"
+        :key="item.value"
+      >
+        <div
+          :class="['mode-list-item-wrap', item.value === theme && 'selected']"
+          @click="changeTheme(item.value)"
+        >
           <div class="item-icon-wrap">
-            <div :class="['item-icon', item.value === 'auto' && 'auto']"
-              :style="{ backgroundColor: item.bgc, color: item.color }">
+            <div
+              :class="['item-icon', item.value === 'auto' && 'auto']"
+              :style="{ backgroundColor: item.bgc, color: item.color }"
+            >
               <el-icon>
                 <component :is="item.icon"></component>
               </el-icon>
             </div>
           </div>
-          <p class="item-label">{{  item.label  }}</p>
+          <p class="item-label">{{ item.label }}</p>
         </div>
       </li>
     </ul>
@@ -72,17 +85,21 @@ const changeActiveColor = (color: ActiveColors) => {
   <section class="page-config-theme-color">
     <p class="title">主题色配置</p>
     <ul class="theme-color-list">
-      <li v-for="item in ActiveColors" :key="item" @click="changeActiveColor(item)"
-        :class="['theme-color-list-item', item === activeColor && 'selected']">
+      <li
+        v-for="item in ActiveColors"
+        :key="item"
+        @click="changeActiveColor(item)"
+        :class="['theme-color-list-item', item === activeColor && 'selected']"
+      >
         <div :style="{ backgroundColor: item }"></div>
       </li>
     </ul>
   </section>
 </template>
 
-<style lang='scss' scoped>
-@import '@/assets/styles/mixins.scss';
-@import './common.scss';
+<style lang="scss" scoped>
+@import "@/assets/styles/mixins";
+@import "./common";
 
 .title {
   @include configItemTitle;
@@ -91,6 +108,7 @@ const changeActiveColor = (color: ActiveColors) => {
 .page-config-theme-mode {
   .mode-list {
     @include flex-row;
+
     justify-content: space-around;
 
     &-item {
@@ -100,15 +118,17 @@ const changeActiveColor = (color: ActiveColors) => {
         @include flex-col;
 
         .item-icon-wrap {
-          height: 70px;
-          padding: 6px 6px;
-          border-radius: 4px;
           overflow: hidden;
+          padding: 6px;
+          height: 70px;
+          border-radius: 4px;
 
           .item-icon {
             position: relative;
+
             @include flex-row;
             @include vh-center;
+
             height: 100%;
 
             &.auto {
@@ -128,27 +148,28 @@ const changeActiveColor = (color: ActiveColors) => {
         }
       }
     }
-
   }
 }
 
 .page-config-theme-color {
   .theme-color-list {
     @include flex-row;
+
     align-items: center;
 
     &-item {
       @include flex-row;
       @include vh-center;
-      height: 50px;
+
       width: 50px;
-      border-radius: 50%;
+      height: 50px;
       border: 2px solid transparent;
+      border-radius: 50%;
       cursor: pointer;
 
       div {
-        height: 80%;
         width: 80%;
+        height: 80%;
         border-radius: 50%;
       }
 

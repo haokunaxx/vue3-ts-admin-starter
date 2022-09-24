@@ -1,14 +1,16 @@
-<script setup lang='ts'>
-import Button from '@/components/Button/Button.index.vue'
+<script setup lang="ts">
+import Button from "@/components/Button/Button.index.vue";
 
-const dialogVisible = ref<boolean>(true)
+const dialogVisible = ref<boolean>(true);
 const openDialog = () => {
-  dialogVisible.value = true
-}
+  dialogVisible.value = true;
+};
 const openAttachedDialog_search = () => {
-
-}
-const openAttachedDialog_recommender = () => { }
+  console.log(1);
+};
+const openAttachedDialog_recommender = () => {
+  console.log(1);
+};
 </script>
 
 <template>
@@ -24,11 +26,11 @@ const openAttachedDialog_recommender = () => { }
                 <el-input />
               </el-form-item>
               <el-form-item label="机构" required>
-                <el-input :disabled='true' />
+                <el-input :disabled="true" />
                 <Button @click="openAttachedDialog_search">查找</Button>
               </el-form-item>
               <el-form-item label="推荐人" required>
-                <el-input :disabled='true' />
+                <el-input :disabled="true" />
                 <Button @click="openAttachedDialog_recommender">查找</Button>
               </el-form-item>
             </el-form>
@@ -49,24 +51,24 @@ const openAttachedDialog_recommender = () => { }
   </teleport>
 </template>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .dialog-container {
   position: fixed;
-  left: 0;
   // bottom: 0;
   // right: 0;
   top: 0;
+  left: 0;
+  z-index: 2001;
   width: 100%;
   height: 100%;
-  z-index: 2001;
 
   .dialog-main-wrapper {
     position: absolute;
-    left: 50%;
     top: 50%;
+    left: 50%;
     width: 80%;
-    transform: translate3d(-50%, -50%, 0);
     background-color: #fff;
+    transform: translate3d(-50%, -50%, 0);
 
     &.scale {
       width: 60%;
@@ -86,26 +88,27 @@ const openAttachedDialog_recommender = () => { }
     width: 100px;
 
     .attached-dialog-list {
-      height: 100%;
       display: flex;
-      flex-direction: column;
       justify-content: flex-end;
+      height: 100%;
+      flex-direction: column;
 
       &-item {
+        margin-bottom: 12px;
         width: 90px;
         height: 60px;
-        margin-bottom: 12px;
         background-color: #fff;
 
         &.show {
-          height: auto;
-          width: auto;
           position: fixed;
-          right: 3%;
           top: 50%;
+          right: 3%;
+          width: auto;
+          height: auto;
           transform: translate3d(0, -50%, 0);
         }
-        .attached-form{
+
+        .attached-form {
           width: 500px;
           height: 500px;
           background-color: #fff;
@@ -117,11 +120,11 @@ const openAttachedDialog_recommender = () => { }
 
 .mask.J_Mask {
   position: fixed;
-  left: 0;
-  right: 0;
   top: 0;
+  right: 0;
   bottom: 0;
-  background-color: rgba($color: #000000, $alpha: 0.5);
+  left: 0;
   z-index: 2000;
+  background-color: rgba($color: #000, $alpha: 50%);
 }
 </style>

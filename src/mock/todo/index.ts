@@ -1,7 +1,7 @@
-import { v4 as uuidv4 } from 'uuid'
-import { Random } from 'mockjs';
-import { MockMethod, RespThisType, Recordable } from 'vite-plugin-mock'
-import { IncomingMessage } from 'http'
+import { v4 as uuidv4 } from "uuid";
+import { Random } from "mockjs";
+import { MockMethod, RespThisType, Recordable } from "vite-plugin-mock";
+import { IncomingMessage } from "http";
 interface Todo {
   id: string;
   title: string;
@@ -13,54 +13,61 @@ interface FetchResponse {
 }
 
 interface FetchTodosResponse extends FetchResponse {
-  data: Todo[]
+  data: Todo[];
 }
 
 interface FetchTodoByIdRequestBody {
-  id: string
+  id: string;
 }
 
 interface RequestWithBody extends IncomingMessage {
   body: {
-    [key: string]: string
-  }
+    [key: string]: string;
+  };
 }
 
 export default [
   {
-    url: '/api/todos',
-    method: 'get',
+    url: "/api/todos",
+    method: "get",
     response: (): FetchTodosResponse => ({
       code: 200,
-      data: Array(Random.natural(6, 10)).fill(null).map(() => ({
-        id: uuidv4(),
-        title: Random.csentence(5, 12),
-        complete: false
-      }))
-    })
+      data: Array(Random.natural(6, 10))
+        .fill(null)
+        .map(() => ({
+          id: uuidv4(),
+          title: Random.csentence(5, 12),
+          complete: false,
+        })),
+    }),
   },
   {
-    url: '/api/todo',
-    method: 'post',
-    response: function (this: RespThisType, opt: { url: Recordable, body: Recordable }) {
-      const { id } = opt.body
-      return id !== undefined ? {
-        code: 401,
-        msg:'success',
-        data:{
-          id: id,
-          title: `这是id为${id}的todo的标题`,
-          complete: false
-        } 
-      } : {
-        code: 200,
-        msg:'bad request',
-        data:null 
-      }
-    }
+    url: "/api/todo",
+    method: "post",
+    response: function (
+      this: RespThisType,
+      opt: { url: Recordable; body: Recordable }
+    ) {
+      const { id } = opt.body;
+      return id !== undefined
+        ? {
+            code: 401,
+            msg: "success",
+            data: {
+              id: id,
+              title: `这是id为${id}的todo的标题`,
+              complete: false,
+            },
+          }
+        : {
+            code: 200,
+            msg: "bad request",
+            data: null,
+          };
+    },
     // rawResponse: (req: RequestWithBody, res) => {
     //   console.log(req)
-    //   return  
+    //   return
     //   const { id } = req.body
     //   if (id !== undefined) {
     //     if (id === '1') {
@@ -82,14 +89,14 @@ export default [
     // }
   },
   {
-    url: '/api/todos',
-    method: 'post',
-    response(){
-      setTimeout(()=>{
+    url: "/api/todos",
+    method: "post",
+    response() {
+      setTimeout(() => {
         return {
-          title:'success'
-        }
-      },10000)
-    }
+          title: "success",
+        };
+      }, 10000);
+    },
   },
-] as MockMethod[]
+] as MockMethod[];

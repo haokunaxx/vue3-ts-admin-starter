@@ -1,27 +1,27 @@
-<script setup lang='ts'>
-import SidebarMenu from '../SidebarMenu/index.vue'
-const emit = defineEmits(['showDrawer'])
+<script setup lang="ts">
+import SidebarMenu from "../SidebarMenu/index.vue";
+const emit = defineEmits(["showDrawer"]);
 const handleClick = () => {
-  emit('showDrawer')
-}
+  emit("showDrawer");
+};
 </script>
 
 <template>
   <el-container>
     <el-header>
-      <SidebarMenu mode='horizontal' />
+      <SidebarMenu mode="horizontal" />
     </el-header>
     <el-container>
       <el-container>
         <el-main class="el-main-wrapper">
-          <el-row :gutter='24'>
-            <el-col :span='23'>
+          <el-row :gutter="24">
+            <el-col :span="23">
               <div class="el-main-wrapper-content">
                 <router-view />
               </div>
             </el-col>
-            <el-col :span='1'>
-              <div class="setting-trigger" @click='handleClick'>
+            <el-col :span="1">
+              <div class="setting-trigger" @click="handleClick">
                 <!-- <el-icon>
                   <Tools />
                 </el-icon> -->
@@ -35,6 +35,3 @@ const handleClick = () => {
     </el-container>
   </el-container>
 </template>
-
-<style lang='scss' scoped>
-</style>

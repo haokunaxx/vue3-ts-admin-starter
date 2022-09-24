@@ -1,8 +1,8 @@
-import { request } from "@/utils/request"
+import { request } from "@/utils/request";
 interface CommonResponse<T> {
   code: number;
   message: string;
-  data: T
+  data: T;
 }
 interface LoginResponse {
   token: string;
@@ -15,10 +15,10 @@ export interface LoginRequestData {
 
 export function Login(data: LoginRequestData) {
   return request<CommonResponse<LoginResponse>, LoginRequestData>({
-    url: 'login',
-    method: 'post',
-    data
-  })
+    url: "login",
+    method: "post",
+    data,
+  });
 }
 
 export interface GetUserInfoRequest {
@@ -34,18 +34,17 @@ export interface GetUserInfoResponse {
 // export function GetUserInfo(data: GetUserInfoRequest) {
 export function GetUserInfo(token: string) {
   return request<CommonResponse<GetUserInfoResponse>, GetUserInfoRequest>({
-    url: 'getUserInfo',
-    method: 'post',
+    url: "getUserInfo",
+    method: "post",
     data: {
-      token
-    }
-  })
+      token,
+    },
+  });
 }
-
 
 export function Logout() {
   return request<CommonResponse<void>, void>({
-    url: 'logout',
-    method: 'post'
-  })
+    url: "logout",
+    method: "post",
+  });
 }

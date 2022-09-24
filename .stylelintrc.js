@@ -40,6 +40,13 @@ module.exports = {
         ignorePseudoClasses: ["deep"],
       },
     ],
+    "at-rule-no-unknown": [
+      true,
+      {
+        ignoreAtRules: ["mixin", "include", "extend"],
+      },
+    ],
+    "selector-class-pattern": null,
     // 指定样式的排序
     "order/properties-order": [
       "position",

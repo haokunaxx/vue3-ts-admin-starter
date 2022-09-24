@@ -5,22 +5,22 @@ body,
 }
 
 .icon {
+  overflow: hidden;
   width: 1em;
   height: 1em;
   vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
+  fill: currentcolor;
 }
 
-.mask.J_mask {
+.mask {
   // display: none;
   position: fixed;
-  left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  left: 0;
   z-index: 999;
+  background: rgb(0 0 0 / 50%);
 
   &.show {
     display: block;

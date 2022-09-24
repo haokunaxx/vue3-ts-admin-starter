@@ -1,22 +1,18 @@
-<script setup lang='ts'>
-import dContainer from '@/components/DialogContainer/dialog.container.index.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <d-container>
-
-  </d-container>
+  <d-container> </d-container>
   <div class="mask"></div>
 </template>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .mask {
   position: fixed;
-  left: 0;
-  right: 0;
   top: 0;
+  right: 0;
   bottom: 0;
-  background-color: rgba($color: #000000, $alpha: 0.5);
+  left: 0;
   z-index: 2000;
+  background-color: rgba($color: #000, $alpha: 50%);
 }
 </style>

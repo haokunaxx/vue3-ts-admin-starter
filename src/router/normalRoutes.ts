@@ -1,84 +1,94 @@
 import { RouteRecordRaw } from "vue-router";
-import Layout from '@/layout/layout.index.vue'
+import Layout from "@/layout/layout.index.vue";
 export default [
   // {
   //   path: '/redirect/:path*',
   // },
   {
-    path: '/',
-    redirect: '/dashboard',
-    hide: true
-  },
-  {
-    name: 'Login',
-    path: '/login',
+    path: "/",
+    redirect: "/dashboard",
     hide: true,
-    component: () => import('@/pages/login.vue'),
   },
   {
-    name: 'Dashboard',
-    path: '/dashboard',
-    redirect: '/dashboard/base',
-    component: Layout,
-    meta: {
-      title: '统计报表',
-      icon: 'chart',
-    },
-    children: [{
-      name: 'BaseDashboard',
-      path: 'base',
-      component: () => import('@/views/chart/chart.index.vue'),
-      meta: {
-        title: '概览仪表盘',
-        icon: 'location',
-      }
-    }]
+    name: "Login",
+    path: "/login",
+    hide: true,
+    component: () => import("@/pages/login.vue"),
   },
   {
-    name: 'BusinessComponents',
-    path: '/business-component',
-    redirect: '/business-component/dialog-container',
+    name: "Dashboard",
+    path: "/dashboard",
+    redirect: "/dashboard/base",
     component: Layout,
     meta: {
-      title: '业务组件',
-      icon: 'chart',
+      title: "统计报表",
+      icon: "chart",
     },
-    children: [{
-      name: 'DialogContainer',
-      path: 'dialog-container',
-      component: () => import('@/views/businessComponents/dialogContainer/bc.dialogContainer.index.vue'),
-      meta: {
-        title: 'Dialog容器',
-        icon: 'location'
-      }
-    }]
+    children: [
+      {
+        name: "BaseDashboard",
+        path: "base",
+        component: () => import("@/views/chart/chart.index.vue"),
+        meta: {
+          title: "概览仪表盘",
+          icon: "location",
+        },
+      },
+    ],
   },
   {
-    path: '/list',
-    name: 'List',
-    redirect: '/list/normal-list',
+    name: "BusinessComponents",
+    path: "/business-component",
+    redirect: "/business-component/dialog-container",
     component: Layout,
     meta: {
-      title: '常见列表',
-      icon: 'list'
+      title: "业务组件",
+      icon: "chart",
     },
-    children: [{
-      name: 'normalList',
-      path: 'normal-list',
-      component: () => import('@/views/list/normal/list.normal.index.vue'),
-      meta: {
-        title: '基础列表',
-        icon: 'location',
-      }
-    }, {
-      name: 'cardList',
-      path: 'card-list',
-      component: () => import('@/views/list/card/list.card.index.vue'),
-      meta: {
-        title: '卡片列表',
-        icon: 'location',
-      }
-    }]
+    children: [
+      {
+        name: "DialogContainer",
+        path: "dialog-container",
+        component: () =>
+          import(
+            "@/views/businessComponents/dialogContainer/bc.dialogContainer.index.vue"
+          ),
+        meta: {
+          title: "Dialog容器",
+          icon: "location",
+        },
+      },
+    ],
+  },
+  {
+    path: "/list",
+    name: "List",
+    redirect: "/list/normal-list",
+    component: Layout,
+    meta: {
+      title: "常见列表",
+      icon: "list",
+    },
+    children: [
+      {
+        name: "normalList",
+        path: "normal-list",
+        component: () => import("@/views/list/normal/list.normal.index.vue"),
+        meta: {
+          title: "基础列表",
+          icon: "location",
+        },
+      },
+      {
+        name: "cardList",
+        path: "card-list",
+        component: () => import("@/views/list/card/list.card.index.vue"),
+        meta: {
+          title: "卡片列表",
+          icon: "location",
+        },
+      },
+    ],
   },
   // {
   //   name: 'Form',
@@ -106,19 +116,21 @@ export default [
   //   }]
   // },
   {
-    name: 'ExternalLink',
-    path: '/external-link',
+    name: "ExternalLink",
+    path: "/external-link",
     component: Layout,
     meta: {
-      title: 'Externals',
-      icon: 'location',
+      title: "Externals",
+      icon: "location",
     },
-    children: [{
-      path: 'https://www.baidu.com',
-      meta: {
-        title: '百度',
-        icon: 'location',
+    children: [
+      {
+        path: "https://www.baidu.com",
+        meta: {
+          title: "百度",
+          icon: "location",
+        },
       },
-    }]
-  }
-] as RouteRecordRaw[]
+    ],
+  },
+] as RouteRecordRaw[];

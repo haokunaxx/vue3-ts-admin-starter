@@ -10,6 +10,5 @@
 //   return prev
 // }, {} as typeof moduleFiles)
 
-
-export { UsePermissionStore } from './permission/permission.index'
-export { UseUserStore } from './user/user.index'
+export { UsePermissionStore } from "./permission/permission.index";
+export { UseUserStore } from "./user/user.index";

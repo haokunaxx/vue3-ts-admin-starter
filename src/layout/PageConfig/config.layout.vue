@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import { ElSwitch } from "element-plus";
 import { UseLayoutStore } from "@/store/layout/layout.index";
 
@@ -9,7 +9,7 @@ import layout2 from "@/assets/images/layout-2.png";
 import layout3 from "@/assets/images/layout-3.png";
 import { LayoutEnum } from "@/store/layout/layout.index";
 import { storeToRefs } from "pinia";
-const store = UseLayoutStore()
+const store = UseLayoutStore();
 const layoutArr = [
   {
     value: LayoutEnum.FullPageLayout,
@@ -40,21 +40,28 @@ const elemCtrlArr = reactive([
   },
 ]);
 
-const { layoutMode } = storeToRefs(store)
+const { layoutMode } = storeToRefs(store);
 const changeAppLayout = (layout: LayoutEnum) => {
-  store.changeAppLayout(layout)
-}
+  store.changeAppLayout(layout);
+};
 </script>
 
 <template>
   <section class="page-config-layout-mode">
     <p class="title">导航布局</p>
     <ul class="mode-list">
-      <li class="mode-list-item" v-for="(item, idx) in layoutArr" :key="idx" @click="changeAppLayout(item.value)">
-        <div :class="[
-          'mode-list-item-wrap',
-          item.value === layoutMode && 'selected',
-        ]">
+      <li
+        class="mode-list-item"
+        v-for="(item, idx) in layoutArr"
+        :key="idx"
+        @click="changeAppLayout(item.value)"
+      >
+        <div
+          :class="[
+            'mode-list-item-wrap',
+            item.value === layoutMode && 'selected',
+          ]"
+        >
           <img class="item-thumbnail-pic" :src="item.img" />
         </div>
       </li>
@@ -71,9 +78,9 @@ const changeAppLayout = (layout: LayoutEnum) => {
   </section> -->
 </template>
 
-<style lang='scss' scoped>
-@import "@/assets/styles/mixins.scss";
-@import "./common.scss";
+<style lang="scss" scoped>
+@import "@/assets/styles/mixins";
+@import "./common";
 
 .title {
   @include configItemTitle;
@@ -82,6 +89,7 @@ const changeAppLayout = (layout: LayoutEnum) => {
 .page-config-layout-mode {
   .mode-list {
     @include flex-row;
+
     justify-content: space-around;
 
     &-item {
@@ -89,7 +97,8 @@ const changeAppLayout = (layout: LayoutEnum) => {
 
       &-wrap {
         @include flex-col;
-        padding: 6px 6px;
+
+        padding: 6px;
         border-radius: 4px;
 
         &.selected {
@@ -104,10 +113,9 @@ const changeAppLayout = (layout: LayoutEnum) => {
   .elem-list {
     &-item {
       @include flex-row;
+
       justify-content: space-between;
       align-items: center;
-
-      &-label {}
     }
   }
 }

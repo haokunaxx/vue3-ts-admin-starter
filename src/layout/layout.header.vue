@@ -1,21 +1,23 @@
-<script setup lang='ts'>
-import Button from '@/components/Button/Button.index.vue'
-import { UseLayoutStore } from '@/store/layout/layout.index';
-import { storeToRefs } from 'pinia';
-const store = UseLayoutStore()
-const { collapse } = storeToRefs(store)
+<script setup lang="ts">
+import Button from "@/components/Button/Button.index.vue";
+import { UseLayoutStore } from "@/store/layout/layout.index";
+import { storeToRefs } from "pinia";
+const store = UseLayoutStore();
+const { collapse } = storeToRefs(store);
 const showDrawer = () => {
-  store.toggleDrawerDisplay(true)
-}
+  store.toggleDrawerDisplay(true);
+};
 
 const toggleSidebarCollapse = () => {
-  store.toggleSidebarMenuCollapse(!collapse.value)
-}
+  store.toggleSidebarMenuCollapse(!collapse.value);
+};
 </script>
 
 <template>
   <header class="header">
-    <div class="header-left">{{  collapse ? 'XX' : 'Vue3-Typescript-ElementPlus Starter' }}</div>
+    <div class="header-left">
+      {{ collapse ? "XX" : "Vue3-Typescript-ElementPlus Starter" }}
+    </div>
 
     <div class="header-middle">
       <Button link @click="toggleSidebarCollapse">
@@ -32,11 +34,12 @@ const toggleSidebarCollapse = () => {
   </el-drawer> -->
 </template>
 
-<style lang='scss' scoped>
-@import '@/assets/styles/mixins.scss';
+<style lang="scss" scoped>
+@import "@/assets/styles/mixins";
 
 .header {
   @include flex-row;
+
   justify-content: space-between;
   align-items: center;
   height: 100%;
@@ -48,21 +51,25 @@ const toggleSidebarCollapse = () => {
   &-left {
     @include flex-row;
     @include vh-center;
-    color: var(--el-color-primary);
+
     font-size: 24px;
     font-family: arial, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    color: var(--el-color-primary);
     font-weight: bolder;
   }
 
   &-middle {
     flex: 1;
+
     @include flex-row;
+
     align-items: center;
     padding-left: 24px;
   }
 
   &-right {
     @include flex-row;
+
     align-items: center;
   }
 }

@@ -9,6 +9,7 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
+    "./.eslintrc-auto-import.json",
   ],
   overrides: [],
   parser: "vue-eslint-parser",
@@ -18,5 +19,8 @@ module.exports = {
     parser: "@typescript-eslint/parser",
   },
   plugins: ["vue", "@typescript-eslint"],
-  rules: {},
+  rules: {
+    "vue/multi-word-component-names": 0,
+    "no-setup-props-destructure": 0,
+  },
 };

@@ -1,9 +1,9 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 type Props = {
   modelValue?: boolean;
-}
-const { modelValue } = defineProps<Props>()
-const dialog = ref(null)
+};
+const { modelValue } = toRefs(defineProps<Props>());
+const dialog = ref(null);
 // onMounted(() => {
 //   console.log(dialog)
 //   const dialogs = document.querySelectorAll('.J_dialog-item')
@@ -25,16 +25,16 @@ const dialog = ref(null)
   </section>
 </template>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .dialog-item {
   position: absolute;
-  left: 50%;
   top: 50%;
-  transform: translate3d(-50%, -50%, 0);
+  left: 50%;
+  z-index: 1000;
   width: 70%;
   height: 80%;
   background-color: #fff;
   border-radius: 10px;
-  z-index: 1000;
+  transform: translate3d(-50%, -50%, 0);
 }
 </style>
