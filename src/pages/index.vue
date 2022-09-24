@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { computed } from '@vue/reactivity';
+import { computed } from 'vue';
 import { onMounted, reactive, ref, provide } from 'vue';
 import { UseUserStore } from '@/store/user/user.index';
 import { router } from '@/router/index'

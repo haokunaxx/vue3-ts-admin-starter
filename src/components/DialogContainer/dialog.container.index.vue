@@ -9,7 +9,7 @@ const closeDialog = () => {
   emit('update:modelValue', false)
 }
 
-const active = ref<Boolean>(false)
+const active = ref<boolean>(false)
 const open = () => {
   active.value = true
 }
