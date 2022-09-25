@@ -46,7 +46,7 @@ module.exports = {
         ignoreAtRules: ["mixin", "include", "extend"],
       },
     ],
-    "selector-class-pattern": null,
+    "selector-class-pattern": /.+/,
     // 指定样式的排序
     "order/properties-order": [
       "position",
