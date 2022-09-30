@@ -1,18 +1,23 @@
 <script setup lang="ts">
-import type { RouteRecordRaw } from "vue-router";
-import Link from "./link.vue";
-import Title from "./title.vue";
+import type { RouteRecordRaw } from 'vue-router'
+import Link from './layout.home.sidebarLink.vue'
+import Title from './layout.home.sidebarTitle.vue'
 const props = defineProps<{
-  parentPath?: string;
-  item: RouteRecordRaw;
-}>();
+  parentPath?: string
+  item: RouteRecordRaw
+}>()
 
 const { item, parentPath } = toRefs(props),
-  { meta, path, children } = item.value;
+  { meta, path, children } = item.value
 const hasChildren = props.item.children?.length ?? false,
-  routePath = `${parentPath ? parentPath + "/" : ""}${path}`;
+  routePath = `${parentPath ? parentPath.value + '/' : ''}${path}`
 </script>
 
+<script lang="ts">
+export default {
+  name: 'SidebarItem'
+}
+</script>
 <template>
   <el-sub-menu v-if="hasChildren" :index="routePath">
     <template #title>

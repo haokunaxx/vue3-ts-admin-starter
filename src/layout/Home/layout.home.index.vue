@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import FullPageLayout from "./Layout/layout.fullPage.vue";
-import NoSidebarLayout from "./Layout/layout.noSidebar.vue";
+import FullPageLayout from './layouts/layout.home.layout.fullPage.vue'
+import NoSidebarLayout from './layouts/layout.home.layout.noSidebar.vue'
 
-import DrawerThemeConfiger from "./PageConfig/config.theme.vue";
-import DrawerLayoutConfiger from "./PageConfig/config.layout.vue";
+import DrawerThemeConfiger from './PageConfig/layout.home.config.themeConfig.vue'
+import DrawerLayoutConfiger from './PageConfig/layout.home.config.layoutConfig.vue'
 
-import { UseLayoutStore, LayoutEnum } from "@/store/layout/layout.index";
-import { storeToRefs } from "pinia";
+import { UseLayoutStore, LayoutEnum } from '@/store/layout/layout.index'
+import { storeToRefs } from 'pinia'
 
-const layoutStore = UseLayoutStore();
-const { layoutMode } = storeToRefs(layoutStore);
+const layoutStore = UseLayoutStore()
+const { layoutMode } = storeToRefs(layoutStore)
 const AppContainer = computed(() => {
   return {
     [LayoutEnum.FullPageLayout]: FullPageLayout,
-    [LayoutEnum.NoSidebarLayout]: NoSidebarLayout,
-  }[layoutMode.value];
-});
+    [LayoutEnum.NoSidebarLayout]: NoSidebarLayout
+  }[layoutMode.value]
+})
 const showDrawer = () => {
-  layoutStore.toggleDrawerDisplay(true);
-};
+  layoutStore.toggleDrawerDisplay(true)
+}
 </script>
 
 <template>

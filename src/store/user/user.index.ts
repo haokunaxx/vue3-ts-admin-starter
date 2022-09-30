@@ -1,25 +1,25 @@
-import { defineStore } from "pinia";
-import UserGetters from "./user.getter";
+import { defineStore } from 'pinia'
+import UserGetters from './user.getter'
 // import * as UserActions from './user.action'
-import * as UserActions from "./actions/index";
-import { GetToken } from "@/utils/auth";
+import * as UserActions from './actions/index'
+import { GetToken } from '@/utils/auth'
 
-import type { UserStoreState } from "./user.types";
+import type { UserStoreState } from './user.types'
 
-export const UseUserStore = defineStore("userStore", {
+export const UseUserStore = defineStore('userStore', {
   state: (): UserStoreState => ({
     //info
-    avatar: "",
-    name: "",
+    avatar: '',
+    name: '',
     roles: [],
-    intro: "",
+    intro: '',
     // auth
     token: GetToken(),
     authRouteNames: [],
-    userRoutes: [],
+    userRoutes: []
   }),
   getters: UserGetters,
   actions: {
-    ...UserActions,
-  },
-});
+    ...UserActions
+  }
+})

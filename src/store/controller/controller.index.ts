@@ -1,12 +1,12 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
-export const UseControllerStore = defineStore("controllerStore", {
+export const UseControllerStore = defineStore('controllerStore', {
   state: () => ({
-    sidebarCollapse: false,
+    sidebarCollapse: false
   }),
   actions: {
     toggleSidebarCollapse(status: boolean): void {
-      this.sidebarCollapse = status;
-    },
-  },
-});
+      this.sidebarCollapse = status
+    }
+  }
+})

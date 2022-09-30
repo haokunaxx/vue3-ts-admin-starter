@@ -1,22 +1,23 @@
 <script setup lang="ts">
-import Button from "@/components/Button/Button.index.vue";
-import { UseLayoutStore } from "@/store/layout/layout.index";
-import { storeToRefs } from "pinia";
-const store = UseLayoutStore();
-const { collapse } = storeToRefs(store);
+import Button from '@/components/Button/Button.index.vue'
+import { UseLayoutStore } from '@/store/layout/layout.index'
+import { storeToRefs } from 'pinia'
+const store = UseLayoutStore()
+const { collapse } = storeToRefs(store)
 const showDrawer = () => {
-  store.toggleDrawerDisplay(true);
-};
+  store.toggleDrawerDisplay(true)
+}
 
 const toggleSidebarCollapse = () => {
-  store.toggleSidebarMenuCollapse(!collapse.value);
-};
+  store.toggleSidebarMenuCollapse(!collapse.value)
+}
 </script>
 
 <template>
   <header class="header">
     <div class="header-left">
-      {{ collapse ? "XX" : "Vue3-Typescript-ElementPlus Starter" }}
+      <!-- {{ collapse ? 'XX' : 'Vue3-Typescript-ElementPlus Starter' }} -->
+      ‘’
     </div>
 
     <div class="header-middle">
@@ -35,7 +36,7 @@ const toggleSidebarCollapse = () => {
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/styles/mixins";
+@import '@/assets/styles/mixins';
 
 .header {
   @include flex-row;
@@ -53,7 +54,7 @@ const toggleSidebarCollapse = () => {
     @include vh-center;
 
     font-size: 24px;
-    font-family: arial, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    font-family: arial, 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
     color: var(--el-color-primary);
     font-weight: bolder;
   }

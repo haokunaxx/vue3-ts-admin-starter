@@ -11,5 +11,8 @@
   // 配置该项，新建文件时默认就是space：2
   "editor.tabSize": 2,
   // stylelint校验的文件格式
-  "stylelint.validate": ["css", "scss", "vue", "html"]
+  "stylelint.validate": ["css", "scss", "vue", "html"],
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

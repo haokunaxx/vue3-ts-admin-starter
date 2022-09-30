@@ -1,21 +1,21 @@
 <script setup lang="ts">
 type Props = {
-  modelValue?: boolean;
-  title?: string;
-};
-const { title = "标题" } = toRaw(defineProps<Props>());
-const emit = defineEmits(["update:modelValue"]);
+  modelValue?: boolean
+  title?: string
+}
+const { title = '标题' } = toRaw(defineProps<Props>())
+const emit = defineEmits(['update:modelValue'])
 const closeDialog = () => {
-  emit("update:modelValue", false);
-};
+  emit('update:modelValue', false)
+}
 
-const active = ref<boolean>(false);
+const active = ref<boolean>(false)
 const open = () => {
-  active.value = true;
-};
+  active.value = true
+}
 const handleClick = () => {
-  console.log(111);
-};
+  console.log(111)
+}
 </script>
 
 <template>

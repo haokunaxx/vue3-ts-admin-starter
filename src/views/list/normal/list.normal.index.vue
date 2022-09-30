@@ -1,193 +1,193 @@
 <script setup lang="ts">
-// import Button from "@/components/Button/Button.index.vue";
-// import Table from "@/components/Table/Table.index.vue";
+import Button from '@/components/Button/Button.index.vue'
+import Table from '@/components/Table/Table.index.vue'
 // import TableFilter from './components/list.table.filter.vue'
-import { useTablePagination } from "@/uses/useTablePagination";
+import { useTablePagination } from '@/uses/useTablePagination'
 
-import { fetchList } from "@/api/list";
-import { List } from "@/mock/list/list";
+import { fetchList } from '@/api/list'
+import { List } from '@/mock/list/list'
 
-import type { Ref } from "vue";
+import type { Ref } from 'vue'
 import {
   FormTypes,
   FormItemType,
   FormItemTypes,
-  LabelKey,
-} from "../list.index.d";
-import { filter } from "lodash";
+  LabelKey
+} from '../list.index.d'
+import { filter } from 'lodash'
 // 表格列数据
 const columns = [
   {
-    type: "selection",
-    fixed: "left",
-    width: "55",
+    type: 'selection',
+    fixed: 'left',
+    width: '55'
   },
   {
-    type: "link",
-    prop: "name",
-    label: "合同名称",
-    to: "https://www.baidu.com",
-    width: "180px",
+    type: 'link',
+    prop: 'name',
+    label: '合同名称',
+    to: 'https://www.baidu.com',
+    width: '180px'
   },
   {
-    prop: "statusLabel",
-    label: "合同状态",
-    width: "120px",
+    prop: 'statusLabel',
+    label: '合同状态',
+    width: '120px'
   },
   {
-    prop: "code",
-    label: "合同编号",
-    width: "180px",
+    prop: 'code',
+    label: '合同编号',
+    width: '180px'
   },
   {
-    prop: "type",
-    label: "合同类型",
-    width: "120px",
+    prop: 'type',
+    label: '合同类型',
+    width: '120px'
   },
   {
-    prop: "recipentPaymentType",
-    label: "合同收付类型",
-    width: "120px",
+    prop: 'recipentPaymentType',
+    label: '合同收付类型',
+    width: '120px'
   },
   {
-    prop: "price",
-    label: "合同金额",
-    width: "120px",
+    prop: 'price',
+    label: '合同金额',
+    width: '120px'
   },
   {
-    prop: "btnGroup",
-    type: "custom",
-    fixed: "right",
-  },
-];
+    prop: 'btnGroup',
+    type: 'custom',
+    fixed: 'right'
+  }
+]
 
 // 列表数据
-const list = ref<List>([]);
+const list = ref<List>([])
 // 过滤后的列表数据
-const filterList = ref<List>([]);
+const filterList = ref<List>([])
 // const filterForm = reactive<FormTypes<Pick<LabelKey, 'name' | 'status' | 'type'>>>([
 const filterForm = reactive<FormTypes>([
   {
     type: FormItemTypes.Input,
-    label: "合同名称",
-    labelKey: "name",
-    value: "",
-    defaultValue: "",
-    placeholder: "请输入合同名称",
+    label: '合同名称',
+    labelKey: 'name',
+    value: '',
+    defaultValue: '',
+    placeholder: '请输入合同名称'
   },
   {
     type: FormItemTypes.CheckboxGroup,
-    label: "合同状态",
-    labelKey: "status",
+    label: '合同状态',
+    labelKey: 'status',
     value: [],
     defaultValue: [],
     options: [
       {
-        label: "已完成",
-        value: "true",
+        label: '已完成',
+        value: 'true'
       },
       {
-        label: "未完成",
-        value: "false",
-      },
-    ],
+        label: '未完成',
+        value: 'false'
+      }
+    ]
   },
   {
     type: FormItemTypes.Select,
     // multiple: true,
-    label: "合同类型",
-    labelKey: "type",
+    label: '合同类型',
+    labelKey: 'type',
     defaultValue: [],
     value: [],
-    placeholder: "请选择合同类型",
+    placeholder: '请选择合同类型',
     options: [
       {
-        label: "待履行",
-        value: "待履行",
-        disabled: false,
+        label: '待履行',
+        value: '待履行',
+        disabled: false
       },
       {
-        label: "审核失败",
-        value: "审核失败",
-        disabled: false,
+        label: '审核失败',
+        value: '审核失败',
+        disabled: false
       },
       {
-        label: "待审核",
-        value: "待审核",
-        disabled: false,
-      },
-    ],
-  },
-]);
+        label: '待审核',
+        value: '待审核',
+        disabled: false
+      }
+    ]
+  }
+])
 
 // 分页数据
-const { currentPage, pageSize, pageSizes, layout } = useTablePagination();
+const { currentPage, pageSize, pageSizes, layout } = useTablePagination()
 
 // 过滤处理函数
 const filterHandler = (list: List, filterFormItem: FormItemType) => {
-  const { labelKey, value } = filterFormItem;
-  let temp;
-  if (!value || (Array.isArray(value) && value.length === 0)) return list;
+  const { labelKey, value } = filterFormItem
+  let temp
+  if (!value || (Array.isArray(value) && value.length === 0)) return list
   switch (labelKey) {
-    case "type":
-      temp = list.filter((item) => value.includes(item.type));
-      break;
-    case "status":
-      temp = list.filter((item) => value.includes("" + item.status));
-      break;
-    case "name":
-      temp = list.filter((item) => item.name.includes(value as string));
-      break;
+    case 'type':
+      temp = list.filter((item) => value.includes(item.type))
+      break
+    case 'status':
+      temp = list.filter((item) => value.includes('' + item.status))
+      break
+    case 'name':
+      temp = list.filter((item) => item.name.includes(value as string))
+      break
     default:
-      temp = list;
-      break;
+      temp = list
+      break
   }
-  return temp;
-};
+  return temp
+}
 
 // 当前页面
 const listOfCurrentPage = computed(() => {
   return filterList.value.slice(
     (currentPage.value - 1) * pageSize.value,
     currentPage.value * pageSize.value
-  );
-});
+  )
+})
 
 onMounted(async () => {
-  const res = await fetchList();
+  const res = await fetchList()
   list.value = res.data.map((item) => ({
     ...item,
-    statusLabel: item.status ? "已完成" : "未完成",
-  }));
+    statusLabel: item.status ? '已完成' : '未完成'
+  }))
   filterList.value = filterForm.reduce((prev: List, next: FormItemType) => {
-    return filterHandler(prev, next);
-  }, list.value);
-});
+    return filterHandler(prev, next)
+  }, list.value)
+})
 
 const onEdit = (val: any) => {
-  console.log(val);
-};
+  console.log(val)
+}
 const onDelete = (val: any) => {
-  console.log(val);
-};
+  console.log(val)
+}
 // 翻页回调
 const onCurrentPageChange = (value: number) => {
-  console.log(value);
-};
+  console.log(value)
+}
 // 页面显示条数发生改变回调
 const onSizeChange = (value: number) => {
-  console.log(value);
-};
+  console.log(value)
+}
 
 const onFilterBtnClick = () => {
   filterList.value = filterForm.reduce((prev: List, next: FormItemType) => {
-    return filterHandler(prev, next);
-  }, list.value);
-};
+    return filterHandler(prev, next)
+  }, list.value)
+}
 
 const onResetBtnClick = () => {
-  filterForm.forEach((item) => (item.value = item.defaultValue));
-};
+  filterForm.forEach((item) => (item.value = item.defaultValue))
+}
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 type Props = {
-  modelValue?: boolean;
-};
-const { modelValue } = toRefs(defineProps<Props>());
-const dialog = ref(null);
+  modelValue?: boolean
+}
+const { modelValue } = toRefs(defineProps<Props>())
+const dialog = ref(null)
 // onMounted(() => {
 //   console.log(dialog)
 //   const dialogs = document.querySelectorAll('.J_dialog-item')

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 interface Props {
-  icon?: string;
-  title?: string;
+  icon?: string
+  title?: string
 }
-const props = defineProps<Props>();
-const svgIcon = `#icon-${props.icon}`;
+const props = defineProps<Props>()
+const svgIcon = `#icon-${props.icon}`
 </script>
 
 <template>

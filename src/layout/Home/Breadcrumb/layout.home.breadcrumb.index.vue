@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
-import { ElBreadcrumb, ElBreadcrumbItem } from "element-plus";
-import { ArrowRight } from "@element-plus/icons-vue";
-import type { RouteLocationMatched } from "vue-router";
+import { useRoute } from 'vue-router'
+import { ElBreadcrumb, ElBreadcrumbItem } from 'element-plus'
+import { ArrowRight } from '@element-plus/icons-vue'
+import type { RouteLocationMatched } from 'vue-router'
 
-type BreadcrumbList = string[];
-type GetBreadcrumbs = (matches: RouteLocationMatched[]) => BreadcrumbList;
+type BreadcrumbList = string[]
+type GetBreadcrumbs = (matches: RouteLocationMatched[]) => BreadcrumbList
 
-const route = useRoute();
-const breadcrumbs = ref<BreadcrumbList>([]);
+const route = useRoute()
+const breadcrumbs = ref<BreadcrumbList>([])
 
 const getBreadcrumbs: GetBreadcrumbs = (matches) => {
   return matches.reduce((prev: BreadcrumbList, next: RouteLocationMatched) => {
-    next.meta?.title && prev.push(next.meta.title);
-    return prev;
-  }, [] as BreadcrumbList);
-};
+    next.meta?.title && prev.push(next.meta.title)
+    return prev
+  }, [] as BreadcrumbList)
+}
 
 watch(
   route,
   (newVal) => {
-    breadcrumbs.value = getBreadcrumbs(newVal.matched);
+    breadcrumbs.value = getBreadcrumbs(newVal.matched)
   },
   {
-    immediate: true,
+    immediate: true
   }
-);
+)
 </script>
 
 <template>

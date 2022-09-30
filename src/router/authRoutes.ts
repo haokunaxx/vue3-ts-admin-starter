@@ -1,43 +1,45 @@
-import { RouteRecordRaw } from "vue-router";
-import Layout from "@/layout/layout.index.vue";
+import { RouteRecordRaw } from 'vue-router'
+// import Layout from "@/layout/layout.index.vue";
+
+import HomeLayout from '@/layout/Home/layout.home.index.vue'
 export default [
   // {
   //   path: '/',
   //   redirect: '/manage'
   // },
   {
-    path: "/manage",
-    name: "Manage",
-    component: Layout,
+    path: '/manage',
+    name: 'Manage',
+    component: HomeLayout,
     meta: {
-      roles: ["admin"],
-      title: "管理",
-      icon: "location",
+      roles: ['admin'],
+      title: '管理',
+      icon: 'location'
     },
     children: [
       {
-        path: "article-list",
-        name: "ArticleManage",
-        component: () => import("@/views/test.vue"),
+        path: 'article-list',
+        name: 'ArticleManage',
+        component: () => import('@/views/test.vue'),
         meta: {
-          roles: ["admin"],
-          title: "文章管理",
-          icon: "location",
-        },
+          roles: ['admin'],
+          title: '文章管理',
+          icon: 'location'
+        }
       },
       {
-        path: "article-edit/:id",
-        name: "ArticleEdit",
-        component: () => import("@/views/test.vue"),
+        path: 'article-edit/:id',
+        name: 'ArticleEdit',
+        component: () => import('@/views/test.vue'),
         hide: true,
         meta: {
-          roles: ["admin"],
-          title: "文章详情",
-          icon: "location",
-        },
-      },
-    ],
-  },
+          roles: ['admin'],
+          title: '文章详情',
+          icon: 'location'
+        }
+      }
+    ]
+  }
   // {
   //   path: '/drag-manage',
   //   component: Layout,
@@ -95,4 +97,4 @@ export default [
   //     icon: 'location',
   //   },
   // }
-] as RouteRecordRaw[];
+] as RouteRecordRaw[]

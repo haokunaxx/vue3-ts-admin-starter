@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import type { Ref } from "vue";
-import { useDraggable } from "@/uses/useDraggable";
+import type { Ref } from 'vue'
+import { useDraggable } from '@/uses/useDraggable'
 type Props = {
-  x: number;
-  y: number;
+  x: number
+  y: number
   edge?: {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-  };
-};
-const line = ref<HTMLElement | null>(null);
-const props = defineProps<Props>();
+    top: number
+    right: number
+    bottom: number
+    left: number
+  }
+}
+const line = ref<HTMLElement | null>(null)
+const props = defineProps<Props>()
 
 const { position, style } = useDraggable(line as Ref<HTMLElement>, {
   initialValue: {
     x: props.x,
-    y: props.y,
+    y: props.y
   },
-  edge: props.edge,
-});
+  edge: props.edge
+})
 
 onMounted(() => {
-  console.log(unref(line.value));
-});
+  console.log(unref(line.value))
+})
 </script>
 
 <template>

@@ -1,57 +1,57 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { ElIcon } from "element-plus";
-import { Sunny, MoonNight, Tools } from "@element-plus/icons-vue";
+import { storeToRefs } from 'pinia'
+import { ElIcon } from 'element-plus'
+import { Sunny, MoonNight, Tools } from '@element-plus/icons-vue'
 
-import { UseLayoutStore, ActiveColors } from "@/store/layout/layout.index";
-import type { Themes } from "@/store/layout/layout.index";
-import { changeThemeColor } from "@/utils/dom";
+import { UseLayoutStore, ActiveColors } from '@/store/layout/layout.index'
+import type { Themes } from '@/store/layout/layout.index'
+import { changeThemeColor } from '@/utils/dom'
 
 const colorObj = {
-  dark: "#222",
-  light: "#eee",
-};
+  dark: '#222',
+  light: '#eee'
+}
 const themeModeConfigArr: {
-  value: Themes;
-  label: string;
-  icon: any;
-  bgc: string;
-  color: string;
+  value: Themes
+  label: string
+  icon: any
+  bgc: string
+  color: string
 }[] = [
   {
-    value: "light",
-    label: "明亮",
+    value: 'light',
+    label: '明亮',
     icon: Sunny,
     bgc: colorObj.light,
-    color: "#000",
+    color: '#000'
   },
   {
-    value: "dark",
-    label: "黑暗",
+    value: 'dark',
+    label: '黑暗',
     icon: MoonNight,
     bgc: colorObj.dark,
-    color: "#fff",
+    color: '#fff'
   },
   {
-    value: "auto",
-    label: "跟随系统",
+    value: 'auto',
+    label: '跟随系统',
     icon: Tools,
     bgc: colorObj.light,
-    color: "#00",
-  },
-];
+    color: '#00'
+  }
+]
 
-const layoutStore = UseLayoutStore();
-const { changeSystemTheme } = layoutStore;
+const layoutStore = UseLayoutStore()
+const { changeSystemTheme } = layoutStore
 
-const { theme, activeColor } = storeToRefs(layoutStore);
+const { theme, activeColor } = storeToRefs(layoutStore)
 
-const changeTheme = (theme: Themes) => changeSystemTheme(theme);
+const changeTheme = (theme: Themes) => changeSystemTheme(theme)
 
 const changeActiveColor = (color: ActiveColors) => {
-  layoutStore.changeActiveColor(color);
-  changeThemeColor(color);
-};
+  layoutStore.changeActiveColor(color)
+  changeThemeColor(color)
+}
 </script>
 
 <template>
@@ -98,8 +98,8 @@ const changeActiveColor = (color: ActiveColors) => {
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/styles/mixins";
-@import "./common";
+@import '@/assets/styles/mixins';
+@import './common';
 
 .title {
   @include configItemTitle;

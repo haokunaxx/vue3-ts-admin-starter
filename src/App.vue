@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { UseLayoutStore } from "./store/layout/layout.index";
-import UseMediaQuery from "./uses/useMediaQuery";
-import { changeSystemTheme, changeThemeColor } from "@/utils/dom";
+import { storeToRefs } from 'pinia'
+import { UseLayoutStore } from './store/layout/layout.index'
+import UseMediaQuery from './uses/useMediaQuery'
+import { changeSystemTheme, changeThemeColor } from '@/utils/dom'
 
-const preferredDark = UseMediaQuery("(prefers-color-scheme: dark)");
-const layoutStore = UseLayoutStore();
-const { theme, activeColor } = storeToRefs(layoutStore);
+const preferredDark = UseMediaQuery('(prefers-color-scheme: dark)')
+const layoutStore = UseLayoutStore()
+const { theme, activeColor } = storeToRefs(layoutStore)
 
 // 初始化主题
 watch(
   [preferredDark, theme],
   ([newPreferredDarkVal, newTheme]) => {
-    if (newTheme === "auto") {
-      changeSystemTheme(newPreferredDarkVal ? "dark" : "light");
+    if (newTheme === 'auto') {
+      changeSystemTheme(newPreferredDarkVal ? 'dark' : 'light')
     } else {
-      changeSystemTheme(newTheme);
+      changeSystemTheme(newTheme)
     }
   },
   {
     immediate: true,
-    flush: "post",
+    flush: 'post'
   }
-);
+)
 // 初始化主题色
-changeThemeColor(activeColor.value);
+changeThemeColor(activeColor.value)
 </script>
 
 <template>

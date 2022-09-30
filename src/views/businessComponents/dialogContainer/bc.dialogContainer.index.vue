@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import Button from "@/components/Button/Button.index.vue";
+import Button from '@/components/Button/Button.index.vue'
 
-const dialogVisible = ref<boolean>(true);
+const dialogVisible = ref<boolean>(true)
 const openDialog = () => {
-  dialogVisible.value = true;
-};
+  dialogVisible.value = true
+}
 const openAttachedDialog_search = () => {
-  console.log(1);
-};
+  console.log(1)
+}
 const openAttachedDialog_recommender = () => {
-  console.log(1);
-};
+  console.log(1)
+}
 </script>
 
 <template>

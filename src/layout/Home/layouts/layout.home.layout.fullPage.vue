@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Header from "../layout.header.vue";
-import SidebarMenu from "../SidebarMenu/index.vue";
-import Breadcrumb from "../Breadcrumb/layout.breadcrumb.index.vue";
-import Tags from "../Tags/layout.tags.index.vue";
+import Header from '../layout.home.header.vue'
+import SidebarMenu from '../SidebarMenu/layout.home.sidebar.index.vue'
+import Breadcrumb from '../Breadcrumb/layout.home.breadcrumb.index.vue'
+import Tags from '../Tags/layout.home.tags.index.vue'
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import Tags from "../Tags/layout.tags.index.vue";
       <Header />
     </el-header>
     <el-container>
-      <el-aside width="auto">
+      <el-aside width="200px">
         <SidebarMenu />
       </el-aside>
       <el-container>

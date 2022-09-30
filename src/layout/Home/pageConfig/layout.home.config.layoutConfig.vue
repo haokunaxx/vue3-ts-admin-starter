@@ -1,49 +1,49 @@
 <script setup lang="ts">
-import { ElSwitch } from "element-plus";
-import { UseLayoutStore } from "@/store/layout/layout.index";
+import { ElSwitch } from 'element-plus'
+import { UseLayoutStore } from '@/store/layout/layout.index'
 
-import UseLocalStorage from "@/uses/useLocalStorage";
+import UseLocalStorage from '@/uses/useLocalStorage'
 
-import layout1 from "@/assets/images/layout-1.png";
-import layout2 from "@/assets/images/layout-2.png";
-import layout3 from "@/assets/images/layout-3.png";
-import { LayoutEnum } from "@/store/layout/layout.index";
-import { storeToRefs } from "pinia";
-const store = UseLayoutStore();
+import layout1 from '@/assets/images/layout-1.png'
+import layout2 from '@/assets/images/layout-2.png'
+import layout3 from '@/assets/images/layout-3.png'
+import { LayoutEnum } from '@/store/layout/layout.index'
+import { storeToRefs } from 'pinia'
+const store = UseLayoutStore()
 const layoutArr = [
   {
     value: LayoutEnum.FullPageLayout,
-    img: layout1,
+    img: layout1
   },
   {
     value: LayoutEnum.NoSidebarLayout,
-    img: layout2,
-  },
+    img: layout2
+  }
   // {
   //   value: "layout-3",
   //   img: layout3,
   // },
-];
+]
 
 const elemCtrlArr = reactive([
   {
-    label: "Header",
-    value: true,
+    label: 'Header',
+    value: true
   },
   {
-    label: "Breadcrumbs",
-    value: true,
+    label: 'Breadcrumbs',
+    value: true
   },
   {
-    label: "Footer",
-    value: true,
-  },
-]);
+    label: 'Footer',
+    value: true
+  }
+])
 
-const { layoutMode } = storeToRefs(store);
+const { layoutMode } = storeToRefs(store)
 const changeAppLayout = (layout: LayoutEnum) => {
-  store.changeAppLayout(layout);
-};
+  store.changeAppLayout(layout)
+}
 </script>
 
 <template>
@@ -59,7 +59,7 @@ const changeAppLayout = (layout: LayoutEnum) => {
         <div
           :class="[
             'mode-list-item-wrap',
-            item.value === layoutMode && 'selected',
+            item.value === layoutMode && 'selected'
           ]"
         >
           <img class="item-thumbnail-pic" :src="item.img" />
@@ -79,8 +79,8 @@ const changeAppLayout = (layout: LayoutEnum) => {
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/styles/mixins";
-@import "./common";
+@import '@/assets/styles/mixins';
+@import './common';
 
 .title {
   @include configItemTitle;

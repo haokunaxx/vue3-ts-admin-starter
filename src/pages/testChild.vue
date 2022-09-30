@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { inject } from "vue";
+import { inject } from 'vue'
 // const test = inject<string>('foo','xuxin')
-import { testKey } from "./key";
-const test = inject(testKey);
+import { testKey } from './key'
+const test = inject(testKey)
 </script>
 
 <template>

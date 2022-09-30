@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import DContianer from "@/components/DialogContainer/dialog.container.index.vue";
+import DContianer from '@/components/DialogContainer/dialog.container.index.vue'
 
-const dContainerShow = ref(false);
+const dContainerShow = ref(false)
 const showDialog = () => {
-  dContainerShow.value = true;
-};
+  dContainerShow.value = true
+}
 </script>
 
 <template>

@@ -1,51 +1,51 @@
 <script setup lang="ts">
-import { ElForm, ElInput, ElButton } from "element-plus";
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { UseUserStore } from "@/store/user/user.index";
+import { ElForm, ElInput, ElButton } from 'element-plus'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { UseUserStore } from '@/store/user/user.index'
 interface LoginResponse {
-  code: number;
+  code: number
   data: {
-    token: string;
-    message: string;
-  };
+    token: string
+    message: string
+  }
 }
 interface LoginRequest {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
-const email = ref(""),
-  password = ref("");
+const email = ref(''),
+  password = ref('')
 
-const redirect = ref("");
+const redirect = ref('')
 
-const userStore = UseUserStore();
+const userStore = UseUserStore()
 
-const router = useRouter();
-const { query } = router.currentRoute.value;
+const router = useRouter()
+const { query } = router.currentRoute.value
 const handleLogin = () => {
   // login
   userStore
     .login({
       email: email.value,
-      password: password.value,
+      password: password.value
     })
     .then(() => {
-      console.log(111);
+      console.log(111)
       if (query.redirect) {
-        console.log(router);
+        console.log(router)
         router.push({
-          path: query.redirect as string,
-        });
+          path: query.redirect as string
+        })
       } else {
         router.push({
-          path: "/charts",
-        });
+          path: '/charts'
+        })
       }
     })
     .catch((err) => {
-      console.log(err);
-    });
+      console.log(err)
+    })
   // if (email.value.length > 0 && password.value.length > 0) {
   //   request<LoginResponse, LoginRequest>({
   //     url: 'login',
@@ -65,7 +65,7 @@ const handleLogin = () => {
   //     console.log(err)
   //   })
   // }
-};
+}
 </script>
 
 <template>

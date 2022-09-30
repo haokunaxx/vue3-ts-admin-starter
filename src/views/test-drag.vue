@@ -1,66 +1,66 @@
 <script setup lang="ts">
 // import { useEventListener } from '@/uses/useEventListener'
 interface PosInfo {
-  top: number;
-  left: number;
-  right: number;
-  bottom: number;
+  top: number
+  left: number
+  right: number
+  bottom: number
   // height: number;
   // width: number;
 }
 interface LineInfo {
-  id: string;
+  id: string
   start: {
-    x: number;
-    y: number;
-  };
-  end?: number;
+    x: number
+    y: number
+  }
+  end?: number
 }
 const outlineShow = ref(false),
-  el = ref(null);
+  el = ref(null)
 const posInfo = reactive<PosInfo>({
   top: 0,
   left: 0,
   right: 0,
-  bottom: 0,
+  bottom: 0
   // height: 0,
   // width: 0
-});
-const lines = reactive<LineInfo[]>([]);
-const activeLineId = ref<string>("");
+})
+const lines = reactive<LineInfo[]>([])
+const activeLineId = ref<string>('')
 const getPointsOfRect = (el: HTMLDivElement) => {
-  console.log(el);
-  console.log(el.getBoundingClientRect());
-  const { top, left, height, width } = el.getBoundingClientRect();
-  posInfo.left = left;
-  posInfo.top = top;
+  console.log(el)
+  console.log(el.getBoundingClientRect())
+  const { top, left, height, width } = el.getBoundingClientRect()
+  posInfo.left = left
+  posInfo.top = top
 
-  posInfo.right = width + left;
-  posInfo.bottom = height + top;
-  return { top, left, height, width };
-};
+  posInfo.right = width + left
+  posInfo.bottom = height + top
+  return { top, left, height, width }
+}
 const showOutline = () => {
-  outlineShow.value = true;
-};
+  outlineShow.value = true
+}
 const addLine = () => {
   // console.log(el?.value)
-  const elem = el?.value;
+  const elem = el?.value
   if (elem && outlineShow.value) {
-    const { left, top, height, width } = getPointsOfRect(elem);
+    const { left, top, height, width } = getPointsOfRect(elem)
     lines.push({
       id: String(Math.random()).slice(5),
       start: {
         x: left + width,
-        y: top + height / 2,
-      },
-    });
+        y: top + height / 2
+      }
+    })
   }
-};
+}
 const deleteLine = () => {
-  const idx = lines.findIndex((item) => item.id === activeLineId.value);
-  lines.splice(idx, 1);
-  console.log(el.value);
-};
+  const idx = lines.findIndex((item) => item.id === activeLineId.value)
+  lines.splice(idx, 1)
+  console.log(el.value)
+}
 </script>
 
 <template>

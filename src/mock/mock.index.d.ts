@@ -1,7 +1,7 @@
 export interface MockResponseBase {
-  code: number;
-  message: string;
+  code: number
+  message: string
   data?: {
-    [key: string]: any;
-  };
+    [key: string]: any
+  }
 }
