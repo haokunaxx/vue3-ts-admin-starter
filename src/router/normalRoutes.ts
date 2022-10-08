@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import HomeLayout from '@/layout/Home/layout.home.index.vue'
-import DragLayout from '@/layout/Drag/layout.drag.index.vue'
+import DragLayout from '@/layout/VisualEditor/index.vue'
 export default [
   // {
   //   path: '/redirect/:path*',

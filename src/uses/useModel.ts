@@ -13,6 +13,7 @@ export function useModel<T>(
       return refVal.value
     },
     set value(val: T) {
+      console.log(val)
       if (refVal.value !== val) {
         refVal.value = val
         valueEmitter(val)

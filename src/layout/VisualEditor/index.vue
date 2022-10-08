@@ -1,11 +1,26 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import VisualEditorEditor from './Editor/index.vue'
+import { componentList, visualEditorContainerProps } from '.'
+import { getDefaultVisualEditorElement } from './utils'
+import type { VisualEditorBlock } from './index.d'
+const elemList = ref<VisualEditorBlock[]>(getDefaultVisualEditorElement())
+console.log(elemList)
+</script>
 
 <template>
   <div class="layout-drag-wrapper">
     <header class="layout-drag-wrapper-header"></header>
     <div class="layout-drag-wrapper-content">
       <section class="layout-left-component-list-wrap"></section>
-      <section class="layout-middle-canvas-wrap"></section>
+      <section class="layout-middle-canvas-wrap">
+        <VisualEditorEditor
+          :style="visualEditorContainerProps.style"
+          type="normal"
+          :list="componentList.render"
+          :data="elemList"
+          v-model="elemList"
+        />
+      </section>
       <section class="layout-right-config-wrap"></section>
     </div>
   </div>
@@ -31,7 +46,7 @@
 
       &left-component-list-wrap {
         width: 200px;
-        // background-color: pink;
+        background-color: pink;
       }
 
       &middle-canvas-wrap {
@@ -41,7 +56,7 @@
 
       &right-config-wrap {
         width: 300px;
-        // background-color: skyblue;
+        background-color: skyblue;
       }
     }
   }
