@@ -5,7 +5,7 @@ function getRoles(state: UserStoreState): string[] {
   return state.roles
 }
 
-function getToken(state: UserStoreState): string {
+function getToken(state: UserStoreState): string | undefined {
   return state.token
 }
 

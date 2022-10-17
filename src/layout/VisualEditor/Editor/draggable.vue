@@ -1,11 +1,13 @@
 <template>
   <div :class="draggableWrapperClass" :style="draggableWrapperStyle">
+    <ResizeBox v-if="props.block.focus" :block="props.block" />
     <slot></slot>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { VisualEditorBlock } from '../index.d'
+import type { VisualEditorBlock } from '../types'
+import ResizeBox from './resizeBox.vue'
 
 interface Props {
   block: VisualEditorBlock
@@ -14,9 +16,12 @@ interface Props {
 const props = defineProps<Props>()
 
 const draggableWrapperStyle = computed(() => {
+  const { left, top, height, width } = props.block
   return {
-    left: props.block.left + 'px',
-    top: props.block.top + 'px'
+    left: left + 'px',
+    top: top + 'px',
+    height: height + 'px',
+    width: width + 'px'
   }
 })
 const draggableWrapperClass = computed(() => [
@@ -26,20 +31,22 @@ const draggableWrapperClass = computed(() => [
   }
 ])
 
-// const emit = defineEmits<{
-//   (event: 'update:left', left: string): void
-// }>()
-// const mousedown = () => {
-//   emit('update:left', '300px')
-// }
+console.log(props.block)
 </script>
 
 <style lang="scss" scoped>
+@mixin vh-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .draggable-wrapper {
   position: absolute;
-  padding: 6px;
+  // padding: 6px;
   border: 1px dashed transparent;
   cursor: pointer;
+  @include vh-center;
 
   &.focus {
     border-color: #2c82fd;

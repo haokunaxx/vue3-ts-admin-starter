@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import VisualEditorEditor from './Editor/index.vue'
+import VisualEditorComponentList from './List/index.vue'
 import { componentList, visualEditorContainerProps } from '.'
 import { getDefaultVisualEditorElement } from './utils'
-import type { VisualEditorBlock } from './index.d'
+import type { VisualEditorBlock } from './types'
 const elemList = ref<VisualEditorBlock[]>(getDefaultVisualEditorElement())
 console.log(elemList)
 </script>
@@ -11,17 +12,18 @@ console.log(elemList)
   <div class="layout-drag-wrapper">
     <header class="layout-drag-wrapper-header"></header>
     <div class="layout-drag-wrapper-content">
-      <section class="layout-left-component-list-wrap"></section>
+      <section class="layout-left-component-list-wrap">
+        <VisualEditorComponentList :list="componentList.preview" />
+      </section>
       <section class="layout-middle-canvas-wrap">
         <VisualEditorEditor
           :style="visualEditorContainerProps.style"
           type="normal"
           :list="componentList.render"
-          :data="elemList"
           v-model="elemList"
         />
       </section>
-      <section class="layout-right-config-wrap"></section>
+      <!-- <section class="layout-right-config-wrap"></section> -->
     </div>
   </div>
 </template>
@@ -40,18 +42,22 @@ console.log(elemList)
     display: flex;
     padding-top: 12px;
     height: calc(100% - 60px);
+    background-color: #eee;
 
     .layout- {
       height: 100%;
 
       &left-component-list-wrap {
-        width: 200px;
-        background-color: pink;
+        padding: 0 6px;
+        width: 240px;
+        // background-color: pink;
       }
 
       &middle-canvas-wrap {
         flex: 1;
-        // background-color: yellow;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
       }
 
       &right-config-wrap {

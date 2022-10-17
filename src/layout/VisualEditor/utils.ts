@@ -2,10 +2,11 @@ import { v4 as uuidv4 } from 'uuid'
 
 import {
   VisualEditorComponent,
+  VisualEditorComponentMap,
   RegisterComponent,
   VisualEditorBlock,
   CompTypes
-} from './index.d'
+} from './types'
 
 export function visualEditorComponentInit() {
   const componentList: {
@@ -16,9 +17,12 @@ export function visualEditorComponentInit() {
     render: []
   }
 
+  const componentsMap: VisualEditorComponentMap = {}
+
   return {
     componentList,
-    register(key: string, componentData: RegisterComponent): void {
+    componentsMap,
+    register(key: CompTypes, componentData: RegisterComponent): void {
       const { label, render, preview } = componentData
       const commonAttrs = {
         key,
@@ -32,6 +36,7 @@ export function visualEditorComponentInit() {
         ...commonAttrs,
         component: render
       })
+      componentsMap[key] = componentData
     }
   }
 }
@@ -46,21 +51,45 @@ export const getDefaultVisualEditorElement: () => VisualEditorBlock[] = () => {
       type: CompTypes.BUTTON,
       top: 200,
       left: 50,
-      focus: false
+      height: 50,
+      width: 100,
+      minHeight: 30,
+      minWidth: 50,
+      focus: false,
+      resizable: {
+        height: true,
+        width: true
+      }
     },
     {
       id: uuidv4(),
       type: CompTypes.INPUT,
       top: 100,
       left: 200,
-      focus: false
+      height: 50,
+      width: 100,
+      minHeight: 40,
+      minWidth: 60,
+      focus: false,
+      resizable: {
+        height: false,
+        width: true
+      }
     },
     {
       id: uuidv4(),
       type: CompTypes.INPUT,
       top: 100,
       left: 300,
-      focus: false
+      height: 50,
+      width: 100,
+      minHeight: 40,
+      minWidth: 60,
+      focus: false,
+      resizable: {
+        height: false,
+        width: true
+      }
     }
   ]
 }
