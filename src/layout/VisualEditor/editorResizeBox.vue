@@ -93,8 +93,8 @@
 </template>
 
 <script setup lang="ts">
-import { VisualEditorBlock, Direction } from '../types'
-import { useResizeBoxDrag } from './drag'
+import { VisualEditorBlock, Direction } from './types'
+import { useResizeBoxDrag } from './editorDrag'
 interface Props {
   block: VisualEditorBlock
 }

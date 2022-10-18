@@ -1,20 +1,14 @@
-<script setup lang="ts">
-import VisualEditorEditor from './Editor/index.vue'
-import VisualEditorComponentList from './List/index.vue'
-import { componentList, visualEditorContainerProps } from '.'
-import { getDefaultVisualEditorElement } from './utils'
-import type { VisualEditorBlock } from './types'
-const elemList = ref<VisualEditorBlock[]>(getDefaultVisualEditorElement())
-console.log(elemList)
-</script>
-
 <template>
   <div class="layout-drag-wrapper">
+    <!-- header -->
     <header class="layout-drag-wrapper-header"></header>
+    <!-- content -->
     <div class="layout-drag-wrapper-content">
+      <!-- componentList -->
       <section class="layout-left-component-list-wrap">
         <VisualEditorComponentList :list="componentList.preview" />
       </section>
+      <!-- editor -->
       <section class="layout-middle-canvas-wrap">
         <VisualEditorEditor
           :style="visualEditorContainerProps.style"
@@ -23,10 +17,20 @@ console.log(elemList)
           v-model="elemList"
         />
       </section>
-      <!-- <section class="layout-right-config-wrap"></section> -->
+      <!-- configPanel -->
+      <section class="layout-right-config-wrap"></section>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import VisualEditorEditor from './editor.vue'
+import VisualEditorComponentList from './list.vue'
+import { componentList, visualEditorContainerProps } from '.'
+import { getDefaultVisualEditorElement } from './utils'
+import type { VisualEditorBlock } from './types'
+const elemList = ref<VisualEditorBlock[]>(getDefaultVisualEditorElement())
+</script>
 
 <style lang="scss" scoped>
 .layout-drag-wrapper {

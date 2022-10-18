@@ -18,7 +18,7 @@
         v-for="elem in editorBlocks.value"
         :key="elem.id"
         :block="elem"
-        @mousedown="(e) => onBlockMousedown(e, elem)"
+        @mousedown="($event: MouseEvent) => onBlockMousedown($event, elem)"
       >
         <component :is="getComponentByType(elem.type)"></component>
       </DraggableBox>
@@ -27,15 +27,15 @@
 </template>
 
 <script setup lang="ts">
-import DraggableBox from './draggable.vue'
-import Guides from './guides.vue'
+import DraggableBox from './editorDraggable.vue'
+import Guides from './editorGuides.vue'
 import type { Component } from 'vue'
 import type {
   CompTypes,
   VisualEditorBlock,
   VisualEditorComponent
-} from '../types'
-import { useVisualEditorDrag, PreventEventDefaultBehaviors } from './drag'
+} from './types'
+import { useVisualEditorDrag, PreventEventDefaultBehaviors } from './editorDrag'
 
 interface Props {
   type: string

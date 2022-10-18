@@ -1,4 +1,4 @@
-import { VisualEditorComponent } from '../index.d'
+import { VisualEditorComponent } from './types'
 
 export const VisualEditorComponentListDrag = {
   dragStart(e: DragEvent, compData: VisualEditorComponent) {

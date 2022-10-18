@@ -1,7 +1,7 @@
 import { Ref } from 'vue'
 import { useModel } from '@/uses/useModel'
 import { v4 as uuidv4 } from 'uuid'
-import { componentsMap } from '../index'
+import { componentsMap } from './index'
 import { quicklySort } from '@/utils/toolFunctions'
 import {
   VisualEditorBlock,
@@ -12,7 +12,7 @@ import {
   ScaleDirection,
   Guides,
   MatchGuides
-} from '../types'
+} from './types'
 // 辅助线显示区间
 const GUIDES_T_RANGE = 5
 let containerOffsetLeft = 0,

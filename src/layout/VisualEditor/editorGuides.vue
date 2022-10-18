@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { MatchGuides } from '../types'
+import { MatchGuides } from './types'
 interface Props {
   matchGuides: MatchGuides
 }

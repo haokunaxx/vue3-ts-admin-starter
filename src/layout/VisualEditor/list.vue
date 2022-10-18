@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { VisualEditorComponent } from '../index.d'
-import { VisualEditorComponentListDrag } from './drag'
+import { VisualEditorComponent } from './types'
+import { VisualEditorComponentListDrag } from './listDrag'
 
 interface Props {
   list: VisualEditorComponent[]

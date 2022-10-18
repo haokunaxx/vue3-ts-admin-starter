@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import type { VisualEditorBlock } from '../types'
-import ResizeBox from './resizeBox.vue'
+import type { VisualEditorBlock } from './types'
+import ResizeBox from './editorResizeBox.vue'
 
 interface Props {
   block: VisualEditorBlock
