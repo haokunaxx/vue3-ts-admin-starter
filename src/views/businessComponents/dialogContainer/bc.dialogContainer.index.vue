@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Button from '@/components/Button/Button.index.vue'
+import Button from '@/components/Button/index.vue'
 
 const dialogVisible = ref<boolean>(true)
 const openDialog = () => {

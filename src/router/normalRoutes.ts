@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
-import HomeLayout from '@/layout/Home/layout.home.index.vue'
+import HomeLayout from '@/layout/Home/index.vue'
 import DragLayout from '@/layout/VisualEditor/index.vue'
 export default [
   // {
@@ -29,11 +29,32 @@ export default [
       {
         name: 'BaseDashboard',
         path: 'base',
-        component: () => import('@/views/chart/chart.index.vue'),
+        component: () => import('@/views/chart/index.vue'),
         meta: {
           title: '概览仪表盘',
           icon: 'location',
           affix: true
+        }
+      }
+    ]
+  },
+  {
+    name: 'GlobalComponents',
+    path: '/global-component',
+    redirect: '/global-component/dialog',
+    component: HomeLayout,
+    meta: {
+      title: '全局组件',
+      icon: 'chart'
+    },
+    children: [
+      {
+        name: 'GlobalDialog',
+        path: 'dialog',
+        component: () => import('@/views/global/index.vue'),
+        meta: {
+          title: '全局对话框',
+          icon: 'location'
         }
       }
     ]
@@ -75,7 +96,7 @@ export default [
       {
         name: 'normalList',
         path: 'normal-list',
-        component: () => import('@/views/list/normal/list.normal.index.vue'),
+        component: () => import('@/views/list/normal/index.vue'),
         meta: {
           title: '基础列表',
           icon: 'location'
@@ -84,7 +105,7 @@ export default [
       {
         name: 'cardList',
         path: 'card-list',
-        component: () => import('@/views/list/card/list.card.index.vue'),
+        component: () => import('@/views/list/card/index.vue'),
         meta: {
           title: '卡片列表',
           icon: 'location'

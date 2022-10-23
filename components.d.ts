@@ -5,16 +5,25 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Button: typeof import('./src/components/Button/index.vue')['default']
     'Button.index': typeof import('./src/components/Button/Button.index.vue')['default']
+    'Button.index copy': typeof import('./src/components/Button/Button.index copy.vue')['default']
+    CarouselForm: typeof import('./src/components/carouselForm/index.vue')['default']
+    Common: typeof import('./src/components/Form/common.vue')['default']
+    CommonLayoutForDialog: typeof import('./src/components/Form/commonLayoutForDialog.vue')['default']
     'Dialog.container.index': typeof import('./src/components/DialogContainer/dialog.container.index.vue')['default']
     'Dialog.index': typeof import('./src/components/Dialog/dialog.index.vue')['default']
     'Dialog.item': typeof import('./src/components/Dialog/dialog.item.vue')['default']
+    DialogFormCommonLayout: typeof import('./src/components/Form/dialogFormCommonLayout.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCarousel: typeof import('element-plus/es')['ElCarousel']
+    ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ElFooter: typeof import('element-plus/es')['ElFooter']
     ElForm: typeof import('element-plus/es')['ElForm']
@@ -35,9 +44,11 @@ declare module '@vue/runtime-core' {
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IEpOperation: typeof import('~icons/ep/operation')['default']
     IEpTools: typeof import('~icons/ep/tools')['default']
+    Link: typeof import('./src/components/Link/index.vue')['default']
     'Link.index': typeof import('./src/components/Link/Link.index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Table: typeof import('./src/components/Table/index.vue')['default']
     'Table.index': typeof import('./src/components/Table/Table.index.vue')['default']
   }
 }

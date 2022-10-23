@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { UseLayoutStore } from './store/layout/layout.index'
+import { UseLayoutStore } from './store/layout/index'
 import UseMediaQuery from './uses/useMediaQuery'
 import { changeSystemTheme, changeThemeColor } from '@/utils/dom'
 

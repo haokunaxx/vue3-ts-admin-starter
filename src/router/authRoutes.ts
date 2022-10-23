@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 // import Layout from "@/layout/layout.index.vue";
 
-import HomeLayout from '@/layout/Home/layout.home.index.vue'
+import HomeLayout from '@/layout/Home/index.vue'
 export default [
   // {
   //   path: '/',

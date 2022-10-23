@@ -2,7 +2,7 @@
 import { ElForm, ElInput, ElButton } from 'element-plus'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { UseUserStore } from '@/store/user/user.index'
+import { UseUserStore } from '@/store/user/index'
 interface LoginResponse {
   code: number
   data: {
