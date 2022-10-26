@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
-import { _RouteRecordBase } from 'vue-router'
+import { _RouteRecordBase, RouteRecordRedirectOption } from 'vue-router'
 declare module 'vue-router' {
   interface _RouteRecordBase {
     hide?: boolean

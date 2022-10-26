@@ -3,7 +3,7 @@ import { ElMenu } from 'element-plus'
 import { useRoute } from 'vue-router'
 import Item from './sidebarItem.vue'
 
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { UseUserStore } from '@/store/user/index'
 import { UseLayoutStore } from '@/store/layout/index'
 const props = defineProps<{
@@ -16,6 +16,7 @@ const userStore = UseUserStore(),
 const isCollapse = computed(() => layoutStore.collapse)
 const route = useRoute()
 const userRoutes = userStore.userRoutes
+console.log(userRoutes)
 const handleOpen = () => {
   console.log('open')
 }

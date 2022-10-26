@@ -5,16 +5,79 @@ export default [
   // {
   //   path: '/redirect/:path*',
   // },
+  // 重定向
   {
     path: '/',
     redirect: '/dashboard',
     hide: true
   },
+  // 登陆
   {
     name: 'Login',
     path: '/login',
     hide: true,
     component: () => import('@/pages/login.vue')
+  },
+  {
+    name: 'Components',
+    path: '/component',
+    redirect: 'component/global/dialog',
+    component: HomeLayout,
+    meta: {
+      title: '组件',
+      icon: 'chart'
+    },
+    children: [
+      {
+        name: 'GlobalComponentDialog',
+        path: 'global/dialog',
+        component: () => import('@/views/global/index.vue'),
+        meta: {
+          title: '全局对话框',
+          icon: 'location',
+          group: 'group one'
+        }
+      },
+      {
+        name: 'GlobalComponentDialog2',
+        path: 'global/dialog2',
+        component: () => import('@/views/global/index.vue'),
+        meta: {
+          title: '全局对话框2',
+          icon: 'location',
+          group: 'group one'
+        }
+      },
+      {
+        name: 'GlobalComponentDialog3',
+        path: 'global/dialog3',
+        component: () => import('@/views/global/index.vue'),
+        meta: {
+          title: '全局对话框3',
+          icon: 'location'
+        }
+      }
+      // {
+      //   name: 'GlobalComponent',
+      //   path: 'global',
+      //   redirect: 'global/dialog',
+      //   meta: {
+      //     title: '全局组件',
+      //     icon: 'chart'
+      //   },
+      //   children: [
+      //     {
+      //       name: 'GlobalComponentDialog',
+      //       path: 'dialog',
+      //       component: () => import('@/views/global/index.vue'),
+      //       meta: {
+      //         title: '全局对话框',
+      //         icon: 'location'
+      //       }
+      //     }
+      //   ]
+      // }
+    ]
   },
   {
     name: 'Dashboard',

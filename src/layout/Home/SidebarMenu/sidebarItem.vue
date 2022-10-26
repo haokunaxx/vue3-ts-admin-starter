@@ -23,7 +23,7 @@ export default {
     <template #title>
       <Title :title="meta?.title" :icon="meta?.icon" />
     </template>
-    <el-menu-item-group>
+    <el-menu-item-group title="group one">
       <SidebarItem
         v-for="child in children"
         :item="child"

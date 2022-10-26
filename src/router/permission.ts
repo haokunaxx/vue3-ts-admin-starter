@@ -1,7 +1,8 @@
 import { router } from './index'
 import { RemoveToken, GetToken } from '@/utils/auth'
 import authRoutes from './authRoutes'
-import normalRoutes from './normalRoutes'
+// import normalRoutes from './normalRoutes'
+import { ProjectRoutes as normalRoutes } from './routes'
 import { UsePermissionStore, UseUserStore } from '@/store/index'
 
 import type { RouteRecordRaw, RouteRecordName } from 'vue-router'
