@@ -2,18 +2,16 @@ import HomeLayout from '@/layout/Home/index.vue' //系统主页面布局
 import DragLayout from '@/layout/VisualEditor/index.vue' //系统拖拽页面布局
 
 import type { RouteRecordRaw } from 'vue-router'
+import { RouteCustom } from './types'
 
-export type RouteWithoutChildren = Omit<RouteRecordRaw, 'children'>
-
-export interface RouteCustom extends RouteWithoutChildren {
-  children?:
-    | {
-        [key: string]: RouteCustom[]
-      }
-    | RouteRecordRaw[]
-}
-
-const routes: RouteCustom[] = [
+// 通用路由
+export const normalSidebarMenuData: RouteCustom[] = [
+  // 重定向
+  {
+    path: '/',
+    redirect: '/list',
+    hide: true
+  },
   {
     path: '/component',
     name: 'Component',
@@ -145,14 +143,92 @@ const routes: RouteCustom[] = [
   }
 ]
 
-const generateRoutes: (route: RouteCustom[]) => RouteRecordRaw[] = (routes) => {
+// 需要权限的路由
+export const authSidebarMenuDataAll: RouteCustom[] = [
+  {
+    path: '/manage',
+    name: 'Manage',
+    component: HomeLayout,
+    meta: {
+      roles: ['admin'],
+      title: '管理',
+      icon: 'location'
+    },
+    children: [
+      {
+        path: 'article-list',
+        name: 'ArticleManage',
+        component: () => import('@/views/test.vue'),
+        meta: {
+          roles: ['admin'],
+          title: '文章管理',
+          icon: 'location'
+        }
+      },
+      {
+        path: 'article-edit/:id',
+        name: 'ArticleEdit',
+        component: () => import('@/views/test.vue'),
+        hide: true,
+        meta: {
+          roles: ['admin'],
+          title: '文章详情',
+          icon: 'location'
+        }
+      }
+    ]
+  },
+  {
+    path: '/manage1',
+    name: 'Manage',
+    component: HomeLayout,
+    meta: {
+      roles: ['admin'],
+      title: '管理管理员可见',
+      icon: 'location'
+    },
+    children: {
+      GroupA: [
+        {
+          path: 'article-list',
+          name: 'ArticleManage',
+          component: () => import('@/views/test.vue'),
+          meta: {
+            roles: ['admin'],
+            title: '管理员可见1',
+            icon: 'location'
+          }
+        }
+      ],
+      GroupB: [
+        {
+          path: 'article-edit/:id',
+          name: 'ArticleEdit',
+          component: () => import('@/views/test.vue'),
+          hide: true,
+          meta: {
+            roles: ['admin'],
+            title: '管理员可见2',
+            icon: 'location'
+          }
+        }
+      ]
+    }
+  }
+]
+
+// FIXME: 过滤空的分类菜单
+export const generateRoutes: (route: RouteCustom[]) => RouteRecordRaw[] = (
+  routes
+) => {
   const format: (route: RouteCustom) => RouteRecordRaw = (route) => {
-    const { name, path, component, meta, redirect } = route
+    const { name, path, component, meta, redirect, hide } = route
     return {
       name,
       path,
       component,
       redirect,
+      hide,
       meta: meta || {},
       children: []
     } as RouteRecordRaw
@@ -160,11 +236,11 @@ const generateRoutes: (route: RouteCustom[]) => RouteRecordRaw[] = (routes) => {
   return routes.reduce((prev, next) => {
     const temp: RouteRecordRaw = format(next)
     if (next.children) {
-      const keys = Object.keys(next.children)
-      for (const key of keys) {
-        if (Array.isArray(next.children)) {
-          temp.children?.push(...next.children)
-        } else {
+      if (Array.isArray(next.children)) {
+        temp.children?.push(...next.children)
+      } else {
+        const keys = Object.keys(next.children)
+        for (const key of keys) {
           temp.children?.push(...next.children[key].map((_) => format(_)))
         }
       }
@@ -174,4 +250,5 @@ const generateRoutes: (route: RouteCustom[]) => RouteRecordRaw[] = (routes) => {
   }, [] as RouteRecordRaw[])
 }
 
-export const ProjectRoutes = generateRoutes(routes)
+export const ProjectNormalRoutes = generateRoutes(normalSidebarMenuData)
+export const ProjectAuthRoutes = generateRoutes(authSidebarMenuDataAll)

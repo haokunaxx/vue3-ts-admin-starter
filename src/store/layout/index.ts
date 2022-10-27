@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { localSet, localGet } from '@/utils/localStorage'
+import type { RouteCustom } from '@/router/types'
 export type Themes = 'light' | 'dark' | 'auto'
 export enum LayoutEnum {
   FullPageLayout = 'fullPageLayout',
@@ -18,6 +19,7 @@ type State = {
   layoutMode: LayoutEnum
   activeColor: ActiveColors
   elemHideArr: string[]
+  sidebarMenuData: RouteCustom[]
 }
 
 export const UseLayoutStore = defineStore('layoutStore', {
@@ -32,7 +34,9 @@ export const UseLayoutStore = defineStore('layoutStore', {
     layoutMode: localGet('preferred-layout') || LayoutEnum.FullPageLayout,
     activeColor: localGet('preferred-color') || ActiveColors.Blue,
     // 隐藏的元素
-    elemHideArr: ['footer']
+    elemHideArr: ['footer'],
+    // 侧边栏数据
+    sidebarMenuData: []
   }),
   actions: {
     toggleSidebarMenuCollapse(newVal: boolean) {
@@ -53,6 +57,9 @@ export const UseLayoutStore = defineStore('layoutStore', {
     changeActiveColor(newActiveColor: ActiveColors) {
       this.activeColor = newActiveColor
       localSet('preferred-color', newActiveColor)
+    },
+    setSidebarMenuData(routes: RouteCustom[]) {
+      this.sidebarMenuData = routes
     }
   }
 })
