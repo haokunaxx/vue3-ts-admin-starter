@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const toDragConfigPage = () => {
-  router.push('/drag-layout/demo')
+  router.push('/visual-editor/low-code')
 }
 </script>
 

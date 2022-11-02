@@ -13,6 +13,12 @@ export const normalSidebarMenuData: RouteCustom[] = [
     hide: true
   },
   {
+    name: 'Login',
+    path: '/login',
+    hide: true,
+    component: () => import('@/pages/login.vue')
+  },
+  {
     path: '/component',
     name: 'Component',
     redirect: '/component/global/dialog',
@@ -104,16 +110,16 @@ export const normalSidebarMenuData: RouteCustom[] = [
     name: 'Drag',
     path: '/drag',
     component: HomeLayout,
-    redirect: '/drag/visual-editor',
+    redirect: '/drag/list',
     meta: {
       title: '拖拽',
       icon: 'chart'
     },
     children: {
-      Editor: [
+      List: [
         {
-          name: 'LowCodeDemo',
-          path: 'visual-editor',
+          name: 'LowCodeList',
+          path: 'list',
           meta: {
             title: '低代码demo',
             icon: 'form'
@@ -122,6 +128,24 @@ export const normalSidebarMenuData: RouteCustom[] = [
         }
       ]
     }
+  },
+  {
+    name: 'VisualEditor',
+    path: '/visual-editor',
+    hide: true,
+    component: DragLayout,
+    redirect: '/visual-editor/low-code',
+    children: [
+      {
+        name: 'LowCodeDemo',
+        path: 'low-code',
+        meta: {
+          title: '低代码demo',
+          icon: 'form'
+        },
+        component: () => import('@/views/drag/dragLayout.test.index.vue')
+      }
+    ]
   },
   {
     name: 'ExternalLink',
@@ -252,3 +276,4 @@ export const generateRoutes: (route: RouteCustom[]) => RouteRecordRaw[] = (
 
 export const ProjectNormalRoutes = generateRoutes(normalSidebarMenuData)
 export const ProjectAuthRoutes = generateRoutes(authSidebarMenuDataAll)
+console.log(ProjectNormalRoutes)
