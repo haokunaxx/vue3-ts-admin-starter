@@ -16,7 +16,7 @@ const toggleSidebarCollapse = () => {
 <template>
   <header class="header">
     <div class="header-left">
-      {{ collapse ? 'XX' : 'Vue3-Typescript-ElementPlus Starter' }}
+      <!-- {{ collapse ? 'XX' : 'Vue3-Typescript-ElementPlus Starter' }} -->
       <!-- ‘’ -->
     </div>
 

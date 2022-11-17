@@ -1,28 +1,17 @@
 import { router } from './index'
 import { RemoveToken, GetToken } from '@/utils/auth'
-// import authRoutes from './authRoutes'
-// import normalRoutes from './normalRoutes'
-import {
-  ProjectNormalRoutes as normalRoutes,
-  ProjectAuthRoutes as authRoutes,
-  normalSidebarMenuData,
-  authSidebarMenuDataAll
-} from './routes'
+import authRoutes from './routes/auth'
+import normalRoutes from './routes/normal'
 import { UsePermissionStore, UseUserStore } from '@/store/index'
 
 import type { RouteRecordRaw, RouteRecordName } from 'vue-router'
-import { RouteCustom } from './types'
-import { UseLayoutStore } from '@/store/layout'
 
 /**
  * 判断是否有权限，根据路由的meta属性对应的roles进行判断
  * @param route 当前判断的路由
  * @param roles 登陆的用户的角色集合
  */
-function hasPermission(
-  route: RouteRecordRaw | RouteCustom,
-  roles: string[]
-): boolean {
+function hasPermission(route: RouteRecordRaw, roles: string[]): boolean {
   if (route.meta?.roles) {
     return roles.some((role) => route.meta?.roles?.includes(role))
   }
@@ -64,42 +53,6 @@ function generateRoute(roles: string[]): RouteRecordRaw[] {
   return generatedRoutes
 }
 
-function filterAuthMenuData(authRoutes: RouteCustom[], roles: string[]) {
-  const resRoutes: RouteCustom[] = []
-  authRoutes.forEach((item) => {
-    const route = { ...item }
-    if (hasPermission(route, roles)) {
-      if (route.children) {
-        if (Array.isArray(item.children)) {
-          ;(route.children as RouteCustom[]) = filterAuthMenuData(
-            item.children,
-            roles
-          )
-        } else {
-          const keys = Object.keys(route.children)
-          for (const key of keys) {
-            ;(route.children as { [key: string]: RouteCustom[] })[key] =
-              filterAuthMenuData(route.children as RouteCustom[], roles)
-          }
-        }
-      }
-      resRoutes.push(route)
-    }
-  })
-  return resRoutes
-}
-// 根据角色获取需要权限的侧边栏数据
-function generateAuthMenuData(roles: string[]): RouteCustom[] {
-  let generatedMenuData
-  if (roles.includes('admin')) {
-    generatedMenuData = authSidebarMenuDataAll || []
-  } else {
-    generatedMenuData = filterAuthMenuData(authSidebarMenuDataAll, roles)
-    console.log('生成的路由：', generatedMenuData)
-  }
-  return generatedMenuData
-}
-
 //路由守卫
 router.beforeEach(async (to, from, next) => {
   const hasToken = GetToken()
@@ -110,7 +63,7 @@ router.beforeEach(async (to, from, next) => {
       // 当前用户能否访问该路由还未进行判断
       const userStore = UseUserStore(),
         permissionStore = UsePermissionStore(),
-        layoutStore = UseLayoutStore(),
+        // layoutStore = UseLayoutStore(),
         roles = userStore.getRoles
       const hasRoles = roles && roles.length > 0
       if (hasRoles) {
@@ -121,7 +74,6 @@ router.beforeEach(async (to, from, next) => {
         try {
           const { roles } = await userStore.getInfo() //请求用户信息
           const routes = generateRoute(roles) //根据用户信息中的roles字段生成对应的路由
-          const authSidebarMenuData = generateAuthMenuData(roles)
           const authRouteNames: RouteRecordName[] = []
           routes.forEach((route) => {
             //添加路由
@@ -132,9 +84,7 @@ router.beforeEach(async (to, from, next) => {
           })
           permissionStore.setAuthRoutesNames(authRouteNames)
           userStore.setUserRoutes(normalRoutes.concat(routes))
-          layoutStore.setSidebarMenuData(
-            normalSidebarMenuData.concat(authSidebarMenuData)
-          )
+          //TODO: 侧边栏分组
           next({ ...to, replace: true })
         } catch (err) {
           console.log('err', err)

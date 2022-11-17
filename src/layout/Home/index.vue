@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import FullPageLayout from './layouts/fullPageLayout.vue'
-import NoSidebarLayout from './layouts/noSidebarLayout.vue'
+import FullPageLayout from './LayoutList/fullPageLayout.vue'
+import NoSidebarLayout from './LayoutList/noSidebarLayout.vue'
 
-import DrawerThemeConfiger from './pageConfig/themeConfig.vue'
-import DrawerLayoutConfiger from './pageConfig/layoutConfig.vue'
+import DrawerThemeConfiger from './PageConfig/themeConfig.vue'
+import DrawerLayoutConfiger from './PageConfig/layoutConfig.vue'
 
 import GlobalDialog from '@/globalComponents/dialog/index.vue'
 

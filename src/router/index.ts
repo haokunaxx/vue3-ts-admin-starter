@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordName } from 'vue-router'
-import { ProjectNormalRoutes } from './routes'
+import NormalRoutes from './routes/normal'
 
 export const router = createRouter({
   history: createWebHashHistory(),
-  routes: [...ProjectNormalRoutes]
+  routes: [...NormalRoutes]
 })
 
 // 删除路由

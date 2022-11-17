@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import FormList from '@/views/supportedViews.ts'
+import FormList from '@/views/supportedViews'
 import { emitter, ShowDialogProps } from '@/utils/emitter'
 import { Handler } from 'mitt'
 interface DialogProps {

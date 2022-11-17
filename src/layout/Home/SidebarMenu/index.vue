@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ElMenu } from 'element-plus'
 import { useRoute } from 'vue-router'
-import Item from './sidebarItem.vue'
+import Item from './item.vue'
 
 import { computed } from 'vue'
 import { UseUserStore } from '@/store/user/index'
@@ -15,9 +15,7 @@ const userStore = UseUserStore(),
   layoutStore = UseLayoutStore()
 const isCollapse = computed(() => layoutStore.collapse)
 const route = useRoute()
-// const userRoutes = userStore.userRoutes
-// console.log(userRoutes)
-const sidebarMenuData = layoutStore.sidebarMenuData
+const userRoutes = userStore.userRoutes
 const handleOpen = () => {
   console.log('open')
 }
@@ -35,7 +33,7 @@ const handleClose = () => {
     @close="handleClose"
     :default-active="route.fullPath"
   >
-    <template v-for="item in sidebarMenuData" :key="item.path">
+    <template v-for="item in userRoutes" :key="item.path">
       <Item v-if="!item.hide" :item="item"></Item>
     </template>
   </el-menu>

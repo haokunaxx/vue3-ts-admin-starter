@@ -1,4 +1,4 @@
-import type { ListItem } from '@/mock/list'
+import type { ListItem } from '@/mock/list/index.d'
 
 export type LabelKey = Omit<ListItem, 'id'>
 
